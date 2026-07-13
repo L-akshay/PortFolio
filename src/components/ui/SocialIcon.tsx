@@ -2,7 +2,7 @@ import { Mail, Globe } from "lucide-react";
 import type { SocialLink } from "@/data/types";
 
 /* Brand icons inlined — lucide-react no longer ships brand logos. */
-function GithubIcon({ className }: { className?: string }) {
+export function GithubIcon({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 24 24"
