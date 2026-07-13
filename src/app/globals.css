@@ -1,0 +1,112 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------------
+   Design tokens — edit here to retheme the whole site.
+   Dark is the primary theme; light is a tuned counterpart, not an inversion.
+--------------------------------------------------------------------------- */
+:root {
+  --background: #f7f7fb;
+  --surface: #ffffff;
+  --surface-elevated: #eef0f7;
+  --foreground: #171b24;
+  --muted-foreground: #5b6474;
+  --primary: #6553e6;
+  --primary-foreground: #ffffff;
+  --secondary: #0e8c86;
+  --success: #157f5c;
+  --border: rgba(101, 83, 230, 0.18);
+  --border-strong: rgba(101, 83, 230, 0.35);
+  --ring: #6553e6;
+  --grain-opacity: 0.25;
+}
+
+.dark {
+  --background: #090b10;
+  --surface: #11151d;
+  --surface-elevated: #171c26;
+  --foreground: #f5f7fa;
+  --muted-foreground: #98a2b3;
+  --primary: #8b7cff;
+  --primary-foreground: #0b0a14;
+  --secondary: #55d6d0;
+  --success: #7fe0b2;
+  --border: rgba(139, 124, 255, 0.18);
+  --border-strong: rgba(139, 124, 255, 0.4);
+  --ring: #8b7cff;
+  --grain-opacity: 0.35;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-elevated: var(--surface-elevated);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-success: var(--success);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ring: var(--ring);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  html.lenis {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+
+/* Anchor targets shouldn't hide under the sticky navbar */
+section[id] {
+  scroll-margin-top: 5rem;
+}
+
+/* Subtle grain overlay, pure CSS — no image request */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: calc(var(--grain-opacity) * 0.12);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* Visible focus ring everywhere, keyboard-only */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Lenis recommendation */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
