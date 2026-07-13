@@ -11,7 +11,11 @@ type AnimatedSectionProps = {
 };
 
 /** Fade + slight rise, once, when the block enters the viewport. */
-export function AnimatedSection({ children, className, delay = 0 }: AnimatedSectionProps) {
+export function AnimatedSection({
+  children,
+  className,
+  delay = 0,
+}: AnimatedSectionProps) {
   const reduceMotion = useReducedMotion();
 
   if (reduceMotion) {

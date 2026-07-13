@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Lakshay — Developer Portfolio
 
-## Getting Started
+Personal portfolio for a full-stack, Android and applied-AI engineer. Built with
+Next.js App Router, TypeScript (strict), Tailwind CSS v4, Radix primitives,
+Framer Motion and Lenis. Includes an "Ask about me" chatbot grounded in an
+approved knowledge file with a deterministic non-AI fallback.
 
-First, run the development server:
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # fill in what you need (everything is optional locally)
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Verification commands:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npx tsc --noEmit     # typecheck
+npx eslint src       # lint
+npm run build        # production build
+npm run format       # prettier
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Editing content
 
-## Learn More
+**All content lives in `src/data/` — components never hardcode text.**
 
-To learn more about Next.js, take a look at the following resources:
+| File | What it controls |
+|---|---|
+| `src/data/profile.ts` | Name, role, tagline, intro, highlights, education, availability |
+| `src/data/experience.ts` | Work experience, contributions (mark top 3 with `top: true`) |
+| `src/data/freelance.ts` | Freelance & client work (supports `confidential: true`) |
+| `src/data/projects.ts` | Projects (`featured: true` shows on homepage, all on /projects) |
+| `src/data/skills.ts` | Skill groups |
+| `src/data/socials.ts` | Social links and contact info — **update the LinkedIn URL** |
+| `src/data/chatbot-faq.ts` | Deterministic chatbot answers + trigger keywords |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The chatbot answers only from this data (`src/data/index.ts` aggregates it into
+one `PortfolioKnowledge` object). Before publishing, review
+[CONTENT_REVIEW.md](./CONTENT_REVIEW.md) — items marked `NEEDS_CONFIRMATION`
+must be verified or removed.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Environment variables
 
-## Deploy on Vercel
+See [.env.example](./.env.example). Everything degrades gracefully:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **No `AI_API_KEY`** → chatbot runs in deterministic fallback mode (still answers common questions).
+- **No `EMAIL_PROVIDER_API_KEY`** → contact form falls back to opening the visitor's mail app.
+- `AI_PROVIDER` supports `anthropic` (default, `claude-opus-4-8`) or `openai`; override the model with `AI_MODEL`. Provider logic is isolated in `src/lib/chatbot/provider.ts`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Architecture notes
+
+- **Server Components by default** — client components only where interaction requires it (navbar scroll-spy, theme toggle, dialogs, forms, chatbot).
+- **Chatbot retrieval** — `src/lib/chatbot/retrieve-context.ts` does scored keyword matching over the knowledge object and sends only relevant context to the model. No vector DB; the knowledge base is small. Add embeddings only if it grows substantially.
+- **Rate limiting** — in-memory sliding window (`src/lib/rate-limit.ts`), fine for a single-instance portfolio; swap for Upstash/Redis if you need strictness across instances.
+- **No database** — nothing is stored server-side.
+- **GSAP intentionally omitted** — framer-motion covers every shipped interaction; see `docs/REFERENCE_AUDIT.md`.
+- **Resume** — `/resume` renders a printable resume from portfolio data (print → save as PDF), so it never drifts out of sync.
+
+## Deploying to Vercel
+
+1. Push this repo to GitHub (already at `L-akshay/PortFolio`).
+2. In [vercel.com/new](https://vercel.com/new), import the repository — the Next.js preset needs no configuration.
+3. Set environment variables in the Vercel project settings (at minimum `NEXT_PUBLIC_SITE_URL=https://your-domain`; add `AI_API_KEY`, `CONTACT_EMAIL`, `EMAIL_PROVIDER_API_KEY` to enable the chatbot AI mode and contact form delivery).
+4. Deploy. `sitemap.xml`, `robots.txt` and the OG image are generated automatically from `NEXT_PUBLIC_SITE_URL`.
+
+Never commit real secrets — `.env*` files are gitignored.

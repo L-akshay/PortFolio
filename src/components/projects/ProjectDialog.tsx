@@ -10,10 +10,10 @@ import { ProjectThumb } from "./ProjectThumb";
 function DetailBlock({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <h4 className="font-mono text-xs tracking-widest text-primary uppercase">
+      <h4 className="text-primary font-mono text-xs tracking-widest uppercase">
         {title}
       </h4>
-      <div className="mt-1.5 text-sm leading-relaxed text-muted">{children}</div>
+      <div className="text-muted mt-1.5 text-sm leading-relaxed">{children}</div>
     </div>
   );
 }
@@ -31,17 +31,17 @@ export function ProjectDialog({
     <Dialog.Root>
       <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm data-[state=open]:animate-in data-[state=open]:fade-in" />
+        <Dialog.Overlay className="data-[state=open]:animate-in data-[state=open]:fade-in fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
         <Dialog.Content
           aria-describedby={undefined}
-          className="fixed top-1/2 left-1/2 z-50 max-h-[85dvh] w-[calc(100vw-2rem)] max-w-2xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border border-border bg-surface p-6 shadow-2xl focus:outline-none"
+          className="border-border bg-surface fixed top-1/2 left-1/2 z-50 max-h-[85dvh] w-[calc(100vw-2rem)] max-w-2xl -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-2xl border p-6 shadow-2xl focus:outline-none"
         >
           <div className="flex items-start justify-between gap-4">
             <div>
               <Dialog.Title className="text-xl font-semibold">
                 {project.title}
               </Dialog.Title>
-              <p className="mt-1 text-sm text-muted">{project.valueProp}</p>
+              <p className="text-muted mt-1 text-sm">{project.valueProp}</p>
               <div className="mt-2 flex flex-wrap items-center gap-1.5">
                 <Badge tone="primary">{project.category}</Badge>
                 <Badge tone="secondary">{project.ownership}</Badge>
@@ -50,7 +50,7 @@ export function ProjectDialog({
             </div>
             <Dialog.Close
               aria-label="Close project details"
-              className="shrink-0 rounded-lg border border-border p-2 text-muted transition-colors hover:bg-elevated hover:text-foreground"
+              className="border-border text-muted hover:bg-elevated hover:text-foreground shrink-0 rounded-lg border p-2 transition-colors"
             >
               <X className="size-4" />
             </Dialog.Close>
@@ -86,13 +86,13 @@ export function ProjectDialog({
           </div>
 
           {(project.githubUrl || project.liveUrl) && (
-            <div className="mt-5 flex gap-4 border-t border-border pt-4 text-sm">
+            <div className="border-border mt-5 flex gap-4 border-t pt-4 text-sm">
               {project.githubUrl ? (
                 <a
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                  className="text-primary inline-flex items-center gap-1.5 hover:underline"
                 >
                   <GithubIcon className="size-4" /> Repository
                 </a>
@@ -102,7 +102,7 @@ export function ProjectDialog({
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-primary hover:underline"
+                  className="text-primary inline-flex items-center gap-1.5 hover:underline"
                 >
                   <ExternalLinkIcon className="size-4" aria-hidden="true" /> Live
                 </a>

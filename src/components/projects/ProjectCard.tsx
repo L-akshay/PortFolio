@@ -11,7 +11,13 @@ import { ProjectThumb } from "./ProjectThumb";
  * Clickable card that opens the project dialog.
  * `wide` renders a horizontal variant for controlled layout variation.
  */
-export function ProjectCard({ project, wide = false }: { project: Project; wide?: boolean }) {
+export function ProjectCard({
+  project,
+  wide = false,
+}: {
+  project: Project;
+  wide?: boolean;
+}) {
   return (
     <ProjectDialog
       project={project}
@@ -20,11 +26,13 @@ export function ProjectCard({ project, wide = false }: { project: Project; wide?
           type="button"
           aria-label={`View details of ${project.title}`}
           className={cn(
-            "group flex w-full cursor-pointer flex-col gap-4 rounded-xl border border-border bg-surface p-4 text-left transition-all hover:border-border-strong hover:shadow-lg hover:shadow-primary/5",
+            "group border-border bg-surface hover:border-border-strong hover:shadow-primary/5 flex w-full cursor-pointer flex-col gap-4 rounded-xl border p-4 text-left transition-all hover:shadow-lg",
             wide && "sm:flex-row sm:items-stretch",
           )}
         >
-          <div className={cn("overflow-hidden rounded-lg", wide && "sm:w-2/5 sm:shrink-0")}>
+          <div
+            className={cn("overflow-hidden rounded-lg", wide && "sm:w-2/5 sm:shrink-0")}
+          >
             <ProjectThumb
               project={project}
               className={cn(
@@ -35,14 +43,14 @@ export function ProjectCard({ project, wide = false }: { project: Project; wide?
           </div>
           <div className="flex flex-1 flex-col">
             <div className="flex items-start justify-between gap-2">
-              <h3 className="font-semibold group-hover:text-primary">{project.title}</h3>
+              <h3 className="group-hover:text-primary font-semibold">{project.title}</h3>
               <ArrowUpRight
-                className="size-4 shrink-0 text-muted transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-primary"
+                className="text-muted group-hover:text-primary size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 aria-hidden="true"
               />
             </div>
-            <p className="mt-1 text-sm leading-relaxed text-muted">{project.valueProp}</p>
-            <p className="mt-1.5 text-xs text-secondary">{project.role}</p>
+            <p className="text-muted mt-1 text-sm leading-relaxed">{project.valueProp}</p>
+            <p className="text-secondary mt-1.5 text-xs">{project.role}</p>
             <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
               {project.impact ? <Badge tone="success">{project.impact}</Badge> : null}
               {project.technologies.slice(0, wide ? 5 : 3).map((tech) => (

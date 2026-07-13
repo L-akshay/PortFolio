@@ -27,7 +27,11 @@ export function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      const json = (await res.json()) as { ok: boolean; error?: string; fallback?: boolean };
+      const json = (await res.json()) as {
+        ok: boolean;
+        error?: string;
+        fallback?: boolean;
+      };
 
       if (json.ok) {
         setStatus("sent");
@@ -129,7 +133,9 @@ export function ContactForm() {
         </Button>
         <p role="status" aria-live="polite" className="text-sm">
           {status === "sent" ? (
-            <span className="text-success">Message sent — I&apos;ll get back to you soon.</span>
+            <span className="text-success">
+              Message sent — I&apos;ll get back to you soon.
+            </span>
           ) : null}
           {status === "error" && error ? (
             <span className="text-red-500 dark:text-red-400">{error}</span>

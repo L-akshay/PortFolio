@@ -24,7 +24,7 @@ export function ProjectsSection() {
       <div className="mt-6">
         <Link
           href="/projects"
-          className="group inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+          className="group text-primary inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
         >
           All projects
           <ArrowRight

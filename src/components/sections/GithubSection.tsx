@@ -37,7 +37,7 @@ async function RepoList() {
   if (!repos || repos.length === 0) {
     // Graceful fallback when the GitHub API is unavailable or rate-limited.
     return (
-      <p className="rounded-xl border border-border bg-surface p-5 text-sm text-muted">
+      <p className="border-border bg-surface text-muted rounded-xl border p-5 text-sm">
         Couldn&apos;t load repositories right now — browse them directly on{" "}
         <a
           href={`https://github.com/${githubUsername}`}
@@ -60,15 +60,15 @@ async function RepoList() {
             href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex h-full flex-col rounded-xl border border-border bg-surface p-4 transition-colors hover:border-border-strong"
+            className="border-border bg-surface hover:border-border-strong flex h-full flex-col rounded-xl border p-4 transition-colors"
           >
-            <p className="truncate font-mono text-sm font-medium text-primary">
+            <p className="text-primary truncate font-mono text-sm font-medium">
               {repo.name}
             </p>
-            <p className="mt-1 line-clamp-2 flex-1 text-xs leading-relaxed text-muted">
+            <p className="text-muted mt-1 line-clamp-2 flex-1 text-xs leading-relaxed">
               {repo.description ?? "No description"}
             </p>
-            <p className="mt-3 flex items-center gap-3 text-xs text-muted">
+            <p className="text-muted mt-3 flex items-center gap-3 text-xs">
               {repo.language ? <span>{repo.language}</span> : null}
               <span className="inline-flex items-center gap-1">
                 <Star className="size-3" aria-hidden="true" />
@@ -92,7 +92,7 @@ function RepoSkeleton() {
       {Array.from({ length: 4 }).map((_, i) => (
         <div
           key={i}
-          className="h-28 animate-pulse rounded-xl border border-border bg-elevated motion-reduce:animate-none"
+          className="border-border bg-elevated h-28 animate-pulse rounded-xl border motion-reduce:animate-none"
         />
       ))}
     </div>
@@ -114,7 +114,7 @@ export function GithubSection() {
         href={`https://github.com/${githubUsername}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+        className="text-primary mt-4 inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
       >
         <GithubIcon className="size-4" />
         github.com/{githubUsername}

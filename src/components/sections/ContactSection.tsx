@@ -17,18 +17,18 @@ export function ContactSection() {
         <div className="space-y-4 text-sm">
           <a
             href={`mailto:${profile.email}`}
-            className="flex items-center gap-2.5 text-foreground hover:text-primary"
+            className="text-foreground hover:text-primary flex items-center gap-2.5"
           >
-            <Mail className="size-4 text-primary" aria-hidden="true" />
+            <Mail className="text-primary size-4" aria-hidden="true" />
             {profile.email}
           </a>
-          <p className="flex items-center gap-2.5 text-muted">
-            <MapPin className="size-4 text-primary" aria-hidden="true" />
+          <p className="text-muted flex items-center gap-2.5">
+            <MapPin className="text-primary size-4" aria-hidden="true" />
             {profile.location}
           </p>
-          <p className="flex items-start gap-2.5 text-muted">
+          <p className="text-muted flex items-start gap-2.5">
             <span
-              className="mt-1 size-2 shrink-0 rounded-full bg-success"
+              className="bg-success mt-1 size-2 shrink-0 rounded-full"
               aria-hidden="true"
             />
             {profile.availability}
@@ -41,14 +41,14 @@ export function ContactSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="rounded-lg p-2.5 text-muted transition-colors hover:bg-elevated hover:text-primary"
+                className="text-muted hover:bg-elevated hover:text-primary rounded-lg p-2.5 transition-colors"
               >
                 <SocialIcon icon={s.icon} className="size-5" />
               </a>
             ))}
           </div>
         </div>
-        <div className="relative rounded-xl border border-border bg-surface p-5">
+        <div className="border-border bg-surface relative rounded-xl border p-5">
           <ContactForm />
         </div>
       </div>

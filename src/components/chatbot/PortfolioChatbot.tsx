@@ -6,10 +6,9 @@ import { MessageCircleQuestion, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // The panel (and framer-motion inside it) loads only when first opened.
-const ChatPanel = dynamic(
-  () => import("./ChatPanel").then((m) => m.ChatPanel),
-  { ssr: false },
-);
+const ChatPanel = dynamic(() => import("./ChatPanel").then((m) => m.ChatPanel), {
+  ssr: false,
+});
 
 const SEEN_KEY = "chatbot-seen";
 
@@ -82,7 +81,7 @@ export function PortfolioChatbot() {
           type="button"
           onClick={() => setDismissed(true)}
           aria-label="Hide chat assistant"
-          className="rounded-full border border-border bg-surface p-1.5 text-muted opacity-60 transition-opacity hover:opacity-100"
+          className="border-border bg-surface text-muted rounded-full border p-1.5 opacity-60 transition-opacity hover:opacity-100"
         >
           <X className="size-3.5" aria-hidden="true" />
         </button>
@@ -92,7 +91,7 @@ export function PortfolioChatbot() {
           onClick={openChat}
           aria-label="Open chat — ask about me"
           className={cn(
-            "group flex h-12 items-center gap-2 rounded-full bg-primary pr-5 pl-4 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/25 transition-transform hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100",
+            "group bg-primary text-primary-foreground shadow-primary/25 flex h-12 items-center gap-2 rounded-full pr-5 pl-4 text-sm font-medium shadow-lg transition-transform hover:scale-[1.03] motion-reduce:transition-none motion-reduce:hover:scale-100",
             pulse && "motion-safe:animate-pulse",
           )}
         >

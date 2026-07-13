@@ -12,14 +12,14 @@ export function ExperienceCard({ item }: { item: ExperienceItem }) {
     .filter((p) => p !== undefined);
 
   return (
-    <article className="relative rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-strong sm:p-6">
+    <article className="border-border bg-surface hover:border-border-strong relative rounded-xl border p-5 transition-colors sm:p-6">
       <header className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
           <h3 className="text-lg font-semibold">
             {item.role} <span className="text-muted">·</span>{" "}
             <span className="text-primary">{item.company}</span>
           </h3>
-          <p className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted">
+          <p className="text-muted mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
             <span className="font-mono">{item.period}</span>
             <span className="inline-flex items-center gap-1">
               <MapPin className="size-3" aria-hidden="true" />
@@ -29,7 +29,7 @@ export function ExperienceCard({ item }: { item: ExperienceItem }) {
         </div>
       </header>
 
-      <p className="mt-3 text-sm leading-relaxed text-muted">{item.description}</p>
+      <p className="text-muted mt-3 text-sm leading-relaxed">{item.description}</p>
 
       <ul className="mt-4 space-y-2.5">
         {topContributions.map((c) => (
@@ -39,7 +39,7 @@ export function ExperienceCard({ item }: { item: ExperienceItem }) {
 
       {moreContributions.length > 0 ? (
         <details className="group mt-3">
-          <summary className="inline-flex cursor-pointer list-none items-center gap-1 rounded-md text-sm font-medium text-primary select-none hover:underline [&::-webkit-details-marker]:hidden">
+          <summary className="text-primary inline-flex cursor-pointer list-none items-center gap-1 rounded-md text-sm font-medium select-none hover:underline [&::-webkit-details-marker]:hidden">
             View all contributions ({moreContributions.length} more)
             <ChevronDown
               className="size-4 transition-transform group-open:rotate-180"
@@ -61,7 +61,7 @@ export function ExperienceCard({ item }: { item: ExperienceItem }) {
       </div>
 
       {related.length > 0 ? (
-        <p className="mt-4 text-xs text-muted">
+        <p className="text-muted mt-4 text-xs">
           Related projects:{" "}
           {related.map((p, i) => (
             <span key={p.slug}>

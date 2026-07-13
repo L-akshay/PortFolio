@@ -32,7 +32,7 @@ export default function ProjectsPage() {
 
       {other.length > 0 ? (
         <AnimatedSection className="mt-14">
-          <h2 className="mb-5 font-mono text-xs tracking-widest text-primary uppercase">
+          <h2 className="text-primary mb-5 font-mono text-xs tracking-widest uppercase">
             {"// more experiments"}
           </h2>
           <div className="grid gap-5 sm:grid-cols-2">

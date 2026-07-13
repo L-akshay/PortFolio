@@ -14,10 +14,10 @@ export function SkillsSection() {
         {skills.map((group) => (
           <div
             key={group.title}
-            className="rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-strong"
+            className="border-border bg-surface hover:border-border-strong rounded-xl border p-5 transition-colors"
           >
             <h3 className="font-semibold">{group.title}</h3>
-            <p className="mt-0.5 text-xs text-muted">{group.summary}</p>
+            <p className="text-muted mt-0.5 text-xs">{group.summary}</p>
             <ul className="mt-3 flex flex-wrap gap-1.5">
               {group.skills.map((skill) => (
                 <li key={skill}>

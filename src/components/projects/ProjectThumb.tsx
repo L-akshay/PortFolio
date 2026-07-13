@@ -23,15 +23,12 @@ export function ProjectThumb({
     <div
       aria-hidden="true"
       className={cn(
-        "relative flex min-h-32 items-center justify-center overflow-hidden rounded-lg border border-border bg-gradient-to-br to-transparent",
+        "border-border relative flex min-h-32 items-center justify-center overflow-hidden rounded-lg border bg-gradient-to-br to-transparent",
         accents[project.accent],
         className,
       )}
     >
-      <svg
-        className="absolute inset-0 h-full w-full opacity-[0.15]"
-        aria-hidden="true"
-      >
+      <svg className="absolute inset-0 h-full w-full opacity-[0.15]" aria-hidden="true">
         <defs>
           <pattern
             id={`grid-${project.slug}`}

@@ -62,13 +62,7 @@ export function retrievePortfolioContext(
   const freelance = topMatches(
     data.freelanceWork.map((f) => ({
       item: f,
-      score: scoreKeywords(q, [
-        f.name,
-        f.industry,
-        "freelance",
-        "client",
-        ...f.stack,
-      ]),
+      score: scoreKeywords(q, [f.name, f.industry, "freelance", "client", ...f.stack]),
     })),
     2,
   );

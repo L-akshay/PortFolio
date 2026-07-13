@@ -40,7 +40,11 @@ export const freelanceWork: FreelanceProject[] = [
       "Small businesses needed fast, SEO-sound landing pages that load well on low-end mobile devices.",
     delivered:
       "Multiple landing pages with optimized images, structured metadata and analytics, deployed on Vercel and Firebase Hosting.",
-    responsibilities: ["Design-to-code implementation", "Performance and SEO", "Deployment"],
+    responsibilities: [
+      "Design-to-code implementation",
+      "Performance and SEO",
+      "Deployment",
+    ],
     stack: ["Next.js", "Tailwind CSS", "Firebase Hosting", "Vercel"],
     status: "delivered",
     confidential: true,

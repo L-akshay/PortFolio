@@ -5,7 +5,10 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Badge } from "@/components/ui/Badge";
 import { ExternalLink } from "@/components/ui/ExternalLink";
 
-const statusLabel: Record<WorkStatus, { text: string; tone: "success" | "warning" | "default" | "secondary" }> = {
+const statusLabel: Record<
+  WorkStatus,
+  { text: string; tone: "success" | "warning" | "default" | "secondary" }
+> = {
   delivered: { text: "Delivered", tone: "success" },
   "in-development": { text: "In development", tone: "warning" },
   prototype: { text: "Prototype", tone: "secondary" },
@@ -15,7 +18,7 @@ const statusLabel: Record<WorkStatus, { text: string; tone: "success" | "warning
 function FreelanceCard({ project }: { project: FreelanceProject }) {
   const status = statusLabel[project.status];
   return (
-    <article className="flex flex-col rounded-xl border border-border bg-surface p-5 transition-colors hover:border-border-strong">
+    <article className="border-border bg-surface hover:border-border-strong flex flex-col rounded-xl border p-5 transition-colors">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="font-semibold">{project.name}</h3>
         <div className="flex items-center gap-1.5">
@@ -28,22 +31,22 @@ function FreelanceCard({ project }: { project: FreelanceProject }) {
           <Badge tone={status.tone}>{status.text}</Badge>
         </div>
       </div>
-      <p className="mt-0.5 text-xs font-medium tracking-wide text-secondary uppercase">
+      <p className="text-secondary mt-0.5 text-xs font-medium tracking-wide uppercase">
         {project.industry}
       </p>
 
       <dl className="mt-3 space-y-2 text-sm">
         <div>
-          <dt className="text-xs font-medium text-muted uppercase">Problem</dt>
-          <dd className="mt-0.5 leading-relaxed text-muted">{project.problem}</dd>
+          <dt className="text-muted text-xs font-medium uppercase">Problem</dt>
+          <dd className="text-muted mt-0.5 leading-relaxed">{project.problem}</dd>
         </div>
         <div>
-          <dt className="text-xs font-medium text-muted uppercase">Delivered</dt>
+          <dt className="text-muted text-xs font-medium uppercase">Delivered</dt>
           <dd className="mt-0.5 leading-relaxed">{project.delivered}</dd>
         </div>
         <div>
-          <dt className="text-xs font-medium text-muted uppercase">My role</dt>
-          <dd className="mt-0.5 leading-relaxed text-muted">
+          <dt className="text-muted text-xs font-medium uppercase">My role</dt>
+          <dd className="text-muted mt-0.5 leading-relaxed">
             {project.responsibilities.join(" · ")}
           </dd>
         </div>
@@ -58,7 +61,10 @@ function FreelanceCard({ project }: { project: FreelanceProject }) {
       {(project.liveUrl || project.caseStudyUrl) && (
         <div className="mt-4 flex gap-4 text-sm">
           {project.liveUrl ? (
-            <ExternalLink href={project.liveUrl} className="inline-flex items-center gap-1">
+            <ExternalLink
+              href={project.liveUrl}
+              className="inline-flex items-center gap-1"
+            >
               Live site <ExternalLinkIcon className="size-3.5" aria-hidden="true" />
             </ExternalLink>
           ) : null}

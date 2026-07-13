@@ -57,7 +57,9 @@ export function Navbar() {
     <header
       className={cn(
         "sticky top-0 z-40 border-b backdrop-blur-md transition-colors duration-300",
-        scrolled ? "border-border bg-background/85" : "border-transparent bg-background/50",
+        scrolled
+          ? "border-border bg-background/85"
+          : "bg-background/50 border-transparent",
       )}
     >
       <nav
@@ -114,23 +116,23 @@ export function Navbar() {
               <DropdownMenu.Content
                 align="end"
                 sideOffset={8}
-                className="z-50 w-44 rounded-xl border border-border bg-surface p-1.5 shadow-lg data-[state=open]:animate-in"
+                className="border-border bg-surface data-[state=open]:animate-in z-50 w-44 rounded-xl border p-1.5 shadow-lg"
               >
                 {sectionLinks.map(({ id, label }) => (
                   <DropdownMenu.Item key={id} asChild>
                     <a
                       href={hrefFor(id)}
-                      className="block cursor-pointer rounded-lg px-3 py-2 text-sm outline-none data-[highlighted]:bg-elevated"
+                      className="data-[highlighted]:bg-elevated block cursor-pointer rounded-lg px-3 py-2 text-sm outline-none"
                     >
                       {label}
                     </a>
                   </DropdownMenu.Item>
                 ))}
-                <DropdownMenu.Separator className="my-1 h-px bg-border" />
+                <DropdownMenu.Separator className="bg-border my-1 h-px" />
                 <DropdownMenu.Item asChild>
                   <Link
                     href="/resume"
-                    className="block cursor-pointer rounded-lg px-3 py-2 text-sm outline-none data-[highlighted]:bg-elevated"
+                    className="data-[highlighted]:bg-elevated block cursor-pointer rounded-lg px-3 py-2 text-sm outline-none"
                   >
                     Resume
                   </Link>

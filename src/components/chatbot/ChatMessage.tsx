@@ -34,8 +34,8 @@ export function ChatMessage({ message }: { message: Message }) {
         className={cn(
           "max-w-[85%] rounded-2xl px-3.5 py-2 text-sm leading-relaxed whitespace-pre-wrap",
           isUser
-            ? "rounded-br-sm bg-primary text-primary-foreground"
-            : "rounded-bl-sm border border-border bg-elevated text-foreground",
+            ? "bg-primary text-primary-foreground rounded-br-sm"
+            : "border-border bg-elevated text-foreground rounded-bl-sm border",
         )}
       >
         {isUser ? message.content : renderWithLinks(message.content)}

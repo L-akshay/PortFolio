@@ -90,19 +90,19 @@ export function ChatPanel({ onMinimize }: { onMinimize: () => void }) {
       initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 380, damping: 30 }}
-      className="fixed inset-x-0 bottom-0 z-50 flex h-[85dvh] flex-col rounded-t-2xl border border-border bg-surface shadow-2xl sm:inset-x-auto sm:right-5 sm:bottom-5 sm:h-auto sm:max-h-[560px] sm:w-[390px] sm:rounded-2xl"
+      className="border-border bg-surface fixed inset-x-0 bottom-0 z-50 flex h-[85dvh] flex-col rounded-t-2xl border shadow-2xl sm:inset-x-auto sm:right-5 sm:bottom-5 sm:h-auto sm:max-h-[560px] sm:w-[390px] sm:rounded-2xl"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between rounded-t-2xl border-b border-border bg-elevated px-4 py-3">
+      <div className="border-border bg-elevated flex items-center justify-between rounded-t-2xl border-b px-4 py-3">
         <div className="flex items-center gap-2.5">
-          <span className="flex size-8 items-center justify-center rounded-lg bg-primary/15">
-            <Sparkles className="size-4 text-primary" aria-hidden="true" />
+          <span className="bg-primary/15 flex size-8 items-center justify-center rounded-lg">
+            <Sparkles className="text-primary size-4" aria-hidden="true" />
           </span>
           <div>
             <p className="text-sm font-semibold">Ask about {profile.name}</p>
-            <p className="flex items-center gap-1.5 text-xs text-muted">
-              <span className="size-1.5 rounded-full bg-success" aria-hidden="true" />
+            <p className="text-muted flex items-center gap-1.5 text-xs">
+              <span className="bg-success size-1.5 rounded-full" aria-hidden="true" />
               Portfolio assistant
             </p>
           </div>
@@ -112,7 +112,7 @@ export function ChatPanel({ onMinimize }: { onMinimize: () => void }) {
             type="button"
             onClick={reset}
             aria-label="Reset conversation"
-            className="rounded-lg p-2 text-muted transition-colors hover:bg-surface hover:text-foreground"
+            className="text-muted hover:bg-surface hover:text-foreground rounded-lg p-2 transition-colors"
           >
             <RotateCcw className="size-4" />
           </button>
@@ -120,7 +120,7 @@ export function ChatPanel({ onMinimize }: { onMinimize: () => void }) {
             type="button"
             onClick={onMinimize}
             aria-label="Minimize chat"
-            className="rounded-lg p-2 text-muted transition-colors hover:bg-surface hover:text-foreground"
+            className="text-muted hover:bg-surface hover:text-foreground rounded-lg p-2 transition-colors"
           >
             <Minus className="size-4" />
           </button>
@@ -137,7 +137,7 @@ export function ChatPanel({ onMinimize }: { onMinimize: () => void }) {
           <ChatMessage key={i} message={m} />
         ))}
         {sending ? (
-          <div className="flex items-center gap-2 text-xs text-muted">
+          <div className="text-muted flex items-center gap-2 text-xs">
             <Loader2 className="size-3.5 animate-spin" aria-hidden="true" />
             Thinking…
           </div>
@@ -149,7 +149,7 @@ export function ChatPanel({ onMinimize }: { onMinimize: () => void }) {
 
       {/* Input */}
       <form
-        className="flex items-center gap-2 border-t border-border p-3"
+        className="border-border flex items-center gap-2 border-t p-3"
         onSubmit={(e) => {
           e.preventDefault();
           send(input);
@@ -165,13 +165,13 @@ export function ChatPanel({ onMinimize }: { onMinimize: () => void }) {
           onChange={(e) => setInput(e.target.value)}
           maxLength={500}
           placeholder="Ask a question…"
-          className="flex-1 rounded-xl border border-border bg-elevated px-3.5 py-2.5 text-sm placeholder:text-muted/60"
+          className="border-border bg-elevated placeholder:text-muted/60 flex-1 rounded-xl border px-3.5 py-2.5 text-sm"
         />
         <button
           type="submit"
           disabled={sending || !input.trim()}
           aria-label="Send message"
-          className="flex size-10 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-opacity disabled:opacity-40"
+          className="bg-primary text-primary-foreground flex size-10 items-center justify-center rounded-xl transition-opacity disabled:opacity-40"
         >
           <Send className="size-4" aria-hidden="true" />
         </button>

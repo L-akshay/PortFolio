@@ -6,8 +6,8 @@ import { PageContainer } from "./PageContainer";
 
 export function Footer() {
   return (
-    <footer className="mt-20 border-t border-border py-10">
-      <PageContainer className="flex flex-col items-center gap-4 text-center text-sm text-muted sm:flex-row sm:justify-between sm:text-left">
+    <footer className="border-border mt-20 border-t py-10">
+      <PageContainer className="text-muted flex flex-col items-center gap-4 text-center text-sm sm:flex-row sm:justify-between sm:text-left">
         <div>
           <p className="font-mono">
             <span className="text-primary">~/</span>
@@ -25,12 +25,12 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.label}
-              className="rounded-md p-2 text-muted transition-colors hover:text-primary"
+              className="text-muted hover:text-primary rounded-md p-2 transition-colors"
             >
               <SocialIcon icon={s.icon} className="size-4" />
             </a>
           ))}
-          <Link href="/privacy" className="ml-2 hover:text-foreground">
+          <Link href="/privacy" className="hover:text-foreground ml-2">
             Privacy
           </Link>
         </div>

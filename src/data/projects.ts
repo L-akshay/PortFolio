@@ -99,7 +99,8 @@ export const projects: Project[] = [
   {
     slug: "floatchat",
     title: "FloatChat",
-    valueProp: "Ocean-data chat platform built by a six-person team for Smart India Hackathon.",
+    valueProp:
+      "Ocean-data chat platform built by a six-person team for Smart India Hackathon.",
     role: "Team lead (6 people)",
     category: "Hackathon",
     ownership: "team project",
@@ -156,7 +157,8 @@ export const projects: Project[] = [
     accent: "violet",
     details: {
       context: "A personal experiment combining social feed mechanics with LLM features.",
-      problem: "Exploring how AI assistance fits into content creation without taking it over.",
+      problem:
+        "Exploring how AI assistance fits into content creation without taking it over.",
       responsibilities: ["Product concept, frontend, LLM integration"],
       decisions: ["Kept AI features as assistive suggestions rather than auto-posting"],
       result: "Functional prototype used to learn applied-AI product patterns.",

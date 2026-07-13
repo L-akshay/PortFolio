@@ -10,7 +10,7 @@ export function AboutSection() {
         About me
       </div>
 
-      <p className="max-w-prose text-sm leading-relaxed text-muted sm:text-base">
+      <p className="text-muted max-w-prose text-sm leading-relaxed sm:text-base">
         {profile.intro}
       </p>
 
@@ -18,27 +18,27 @@ export function AboutSection() {
         {profile.highlights.map((h) => (
           <div
             key={h.label}
-            className="rounded-xl border border-border bg-surface p-4 transition-colors hover:border-border-strong"
+            className="border-border bg-surface hover:border-border-strong rounded-xl border p-4 transition-colors"
           >
-            <dt className="text-xs font-medium tracking-wide text-muted uppercase">
+            <dt className="text-muted text-xs font-medium tracking-wide uppercase">
               {h.label}
             </dt>
-            <dd className="mt-1 text-2xl font-semibold text-primary">{h.value}</dd>
-            <dd className="mt-1 text-xs leading-relaxed text-muted">{h.detail}</dd>
+            <dd className="text-primary mt-1 text-2xl font-semibold">{h.value}</dd>
+            <dd className="text-muted mt-1 text-xs leading-relaxed">{h.detail}</dd>
           </div>
         ))}
       </dl>
 
-      <div className="mt-6 space-y-3 text-sm text-muted">
+      <div className="text-muted mt-6 space-y-3 text-sm">
         {education.map((e) => (
           <p key={e.institution}>
-            <span className="font-medium text-foreground">{e.institution}</span> —{" "}
+            <span className="text-foreground font-medium">{e.institution}</span> —{" "}
             {e.degree}, {e.period}
             {e.detail ? ` · ${e.detail}` : ""}
           </p>
         ))}
-        <p className="flex items-start gap-2 rounded-lg border border-border bg-elevated/60 p-3">
-          <Compass className="mt-0.5 size-4 shrink-0 text-secondary" aria-hidden="true" />
+        <p className="border-border bg-elevated/60 flex items-start gap-2 rounded-lg border p-3">
+          <Compass className="text-secondary mt-0.5 size-4 shrink-0" aria-hidden="true" />
           <span>{profile.currentFocus}</span>
         </p>
       </div>

@@ -12,7 +12,14 @@ export const faq: FAQItem[] = [
       "Email lakshaydawar2006@gmail.com, or use the contact form in the Contact section. GitHub: github.com/L-akshay.",
   },
   {
-    triggers: ["available", "availability", "internship", "opportunit", "open to", "remote"],
+    triggers: [
+      "available",
+      "availability",
+      "internship",
+      "opportunit",
+      "open to",
+      "remote",
+    ],
     question: "Is Lakshay available for internships?",
     answer:
       "Yes — Lakshay is open to internships and engineering opportunities, including remote roles. He is based in Delhi, India.",
@@ -68,12 +75,14 @@ export const faq: FAQItem[] = [
   {
     triggers: ["resume", "cv"],
     question: "Where can I find the resume?",
-    answer: "The Resume page (/resume) has a full printable resume built from this portfolio.",
+    answer:
+      "The Resume page (/resume) has a full printable resume built from this portfolio.",
   },
   {
     triggers: ["github", "repos", "code"],
     question: "Where is Lakshay's GitHub?",
-    answer: "github.com/L-akshay — recent public repositories are shown in the GitHub section.",
+    answer:
+      "github.com/L-akshay — recent public repositories are shown in the GitHub section.",
   },
   {
     triggers: ["freelance", "client", "commission"],

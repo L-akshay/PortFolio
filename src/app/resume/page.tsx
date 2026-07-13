@@ -24,11 +24,11 @@ export default function ResumePage() {
         <PrintButton />
       </div>
 
-      <article className="space-y-8 rounded-xl border border-border bg-surface p-6 sm:p-10 print:border-0 print:p-0">
+      <article className="border-border bg-surface space-y-8 rounded-xl border p-6 sm:p-10 print:border-0 print:p-0">
         <header>
           <h2 className="text-3xl font-bold tracking-tight">{profile.name}</h2>
-          <p className="mt-1 text-lg text-primary">{profile.role}</p>
-          <p className="mt-2 text-sm text-muted">
+          <p className="text-primary mt-1 text-lg">{profile.role}</p>
+          <p className="text-muted mt-2 text-sm">
             {profile.location} · {profile.email} ·{" "}
             {socials
               .filter((s) => s.icon !== "mail")
@@ -38,14 +38,20 @@ export default function ResumePage() {
         </header>
 
         <section aria-labelledby="resume-summary">
-          <h3 id="resume-summary" className="mb-2 font-mono text-xs tracking-widest text-primary uppercase">
+          <h3
+            id="resume-summary"
+            className="text-primary mb-2 font-mono text-xs tracking-widest uppercase"
+          >
             Summary
           </h3>
-          <p className="text-sm leading-relaxed text-muted">{profile.intro}</p>
+          <p className="text-muted text-sm leading-relaxed">{profile.intro}</p>
         </section>
 
         <section aria-labelledby="resume-experience">
-          <h3 id="resume-experience" className="mb-3 font-mono text-xs tracking-widest text-primary uppercase">
+          <h3
+            id="resume-experience"
+            className="text-primary mb-3 font-mono text-xs tracking-widest uppercase"
+          >
             Experience
           </h3>
           {experience.map((item) => (
@@ -54,14 +60,14 @@ export default function ResumePage() {
                 <p className="font-semibold">
                   {item.role} — {item.company}
                 </p>
-                <p className="text-xs text-muted">
+                <p className="text-muted text-xs">
                   {item.period} · {item.location}
                 </p>
               </div>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted">
+              <ul className="text-muted mt-2 list-disc space-y-1 pl-5 text-sm">
                 {item.contributions.map((c) => (
                   <li key={c.text}>
-                    <span className="font-medium text-foreground">[{c.area}]</span>{" "}
+                    <span className="text-foreground font-medium">[{c.area}]</span>{" "}
                     {c.text}
                   </li>
                 ))}
@@ -71,7 +77,10 @@ export default function ResumePage() {
         </section>
 
         <section aria-labelledby="resume-projects">
-          <h3 id="resume-projects" className="mb-3 font-mono text-xs tracking-widest text-primary uppercase">
+          <h3
+            id="resume-projects"
+            className="text-primary mb-3 font-mono text-xs tracking-widest uppercase"
+          >
             Selected Projects
           </h3>
           <ul className="space-y-3">
@@ -83,14 +92,17 @@ export default function ResumePage() {
                     ({p.role}) — {p.valueProp}
                   </span>
                 </p>
-                <p className="text-xs text-muted">{p.technologies.join(" · ")}</p>
+                <p className="text-muted text-xs">{p.technologies.join(" · ")}</p>
               </li>
             ))}
           </ul>
         </section>
 
         <section aria-labelledby="resume-skills">
-          <h3 id="resume-skills" className="mb-3 font-mono text-xs tracking-widest text-primary uppercase">
+          <h3
+            id="resume-skills"
+            className="text-primary mb-3 font-mono text-xs tracking-widest uppercase"
+          >
             Skills
           </h3>
           <ul className="space-y-1.5 text-sm">
@@ -104,7 +116,10 @@ export default function ResumePage() {
         </section>
 
         <section aria-labelledby="resume-education">
-          <h3 id="resume-education" className="mb-3 font-mono text-xs tracking-widest text-primary uppercase">
+          <h3
+            id="resume-education"
+            className="text-primary mb-3 font-mono text-xs tracking-widest uppercase"
+          >
             Education
           </h3>
           {education.map((e) => (

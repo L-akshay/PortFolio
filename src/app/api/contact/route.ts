@@ -9,8 +9,9 @@ const contactSchema = z.object({
   email: z.string().trim().email("Enter a valid email").max(200),
   subject: z.string().trim().min(1, "Subject is required").max(150),
   message: z.string().trim().min(10, "Message is too short").max(3000),
-  // Honeypot — real users never fill this hidden field.
-  company: z.string().max(0).optional().or(z.literal("")),
+  // Honeypot — real users never fill this hidden field. Validation must not
+  // reject it (that would tip off bots); the value is checked after parsing.
+  company: z.string().max(200).optional(),
 });
 
 export async function POST(request: Request) {

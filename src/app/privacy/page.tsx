@@ -11,12 +11,10 @@ export default function PrivacyPage() {
   return (
     <PageContainer className="max-w-2xl pt-14 pb-24">
       <h1 className="text-2xl font-semibold tracking-tight">Privacy</h1>
-      <div className="mt-6 space-y-5 text-sm leading-relaxed text-muted">
-        <p>
-          This is a personal portfolio site. It collects as little data as possible.
-        </p>
+      <div className="text-muted mt-6 space-y-5 text-sm leading-relaxed">
+        <p>This is a personal portfolio site. It collects as little data as possible.</p>
         <section>
-          <h2 className="mb-1.5 font-semibold text-foreground">Chat assistant</h2>
+          <h2 className="text-foreground mb-1.5 font-semibold">Chat assistant</h2>
           <p>
             Messages you send to the &quot;Ask about me&quot; assistant are forwarded to
             an AI provider to generate a reply and are not stored by this site. Please
@@ -26,23 +24,21 @@ export default function PrivacyPage() {
           </p>
         </section>
         <section>
-          <h2 className="mb-1.5 font-semibold text-foreground">Contact form</h2>
+          <h2 className="text-foreground mb-1.5 font-semibold">Contact form</h2>
           <p>
             Messages sent through the contact form are delivered to my email inbox and
-            used only to reply to you. They are not stored in any database by this
-            site.
+            used only to reply to you. They are not stored in any database by this site.
           </p>
         </section>
         <section>
-          <h2 className="mb-1.5 font-semibold text-foreground">Cookies & analytics</h2>
+          <h2 className="text-foreground mb-1.5 font-semibold">Cookies & analytics</h2>
           <p>
             This site does not set tracking cookies. Your theme preference and whether
-            you&apos;ve seen the chat assistant are stored locally in your browser
-            only.
+            you&apos;ve seen the chat assistant are stored locally in your browser only.
           </p>
         </section>
         <section>
-          <h2 className="mb-1.5 font-semibold text-foreground">Questions</h2>
+          <h2 className="text-foreground mb-1.5 font-semibold">Questions</h2>
           <p>
             Email{" "}
             <a href={`mailto:${profile.email}`} className="text-primary hover:underline">

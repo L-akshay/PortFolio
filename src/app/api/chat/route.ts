@@ -32,7 +32,9 @@ export async function POST(request: Request) {
   const limit = rateLimit(`chat:${key}`, { max: RATE_MAX, windowSeconds: RATE_WINDOW });
   if (!limit.allowed) {
     return NextResponse.json(
-      { reply: "You're sending messages a bit fast — please try again in a few minutes." },
+      {
+        reply: "You're sending messages a bit fast — please try again in a few minutes.",
+      },
       { status: 429, headers: { "Retry-After": String(limit.retryAfterSeconds) } },
     );
   }
