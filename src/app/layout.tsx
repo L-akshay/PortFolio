@@ -5,6 +5,7 @@ import { Providers } from "@/components/layout/Providers";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { PortfolioChatbot } from "@/components/chatbot/PortfolioChatbot";
 import { profile } from "@/data/profile";
 import { siteUrl } from "@/lib/site";
 
@@ -25,6 +26,32 @@ export const metadata: Metadata = {
     template: `%s — ${profile.name}`,
   },
   description: profile.tagline,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    siteName: profile.name,
+    title: `${profile.name} — ${profile.role}`,
+    description: profile.tagline,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${profile.name} — ${profile.role}`,
+    description: profile.tagline,
+  },
+  robots: { index: true, follow: true },
+};
+
+/** schema.org Person structured data for search engines. */
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: profile.role,
+  email: `mailto:${profile.email}`,
+  address: { "@type": "PostalAddress", addressLocality: "Delhi", addressCountry: "IN" },
+  url: siteUrl,
+  sameAs: ["https://github.com/L-akshay"],
 };
 
 export default function RootLayout({
@@ -39,11 +66,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="grain flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
         <Providers>
           <SmoothScroll />
           <Navbar />
           <main className="relative z-10 flex-1">{children}</main>
           <Footer />
+          <PortfolioChatbot />
         </Providers>
       </body>
     </html>
