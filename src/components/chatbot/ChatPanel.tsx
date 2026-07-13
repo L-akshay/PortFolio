@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Loader2, RotateCcw, Minus, Send, Sparkles } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { profile } from "@/data/profile";
 import { ChatMessage, type Message } from "./ChatMessage";
 import { SuggestedQuestions } from "./SuggestedQuestions";
@@ -18,7 +18,6 @@ export function ChatPanel({ onMinimize }: { onMinimize: () => void }) {
   const [sending, setSending] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight });
@@ -87,7 +86,9 @@ export function ChatPanel({ onMinimize }: { onMinimize: () => void }) {
     <motion.div
       role="dialog"
       aria-label={`Chat with ${profile.name}'s portfolio assistant`}
-      initial={reduceMotion ? false : { opacity: 0, y: 24, scale: 0.96 }}
+      // MotionConfig reducedMotion="user" (Providers) strips the movement
+      // for reduced-motion visitors, leaving only the fade.
+      initial={{ opacity: 0, y: 24, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ type: "spring", stiffness: 380, damping: 30 }}
       className="border-border bg-surface fixed inset-x-0 bottom-0 z-50 flex h-[85dvh] flex-col rounded-t-2xl border shadow-2xl sm:inset-x-auto sm:right-5 sm:bottom-5 sm:h-auto sm:max-h-[560px] sm:w-[390px] sm:rounded-2xl"

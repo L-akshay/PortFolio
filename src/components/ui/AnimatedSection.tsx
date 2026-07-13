@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 type AnimatedSectionProps = {
@@ -10,18 +10,16 @@ type AnimatedSectionProps = {
   delay?: number;
 };
 
-/** Fade + slight rise, once, when the block enters the viewport. */
-export function AnimatedSection({
-  children,
-  className,
-  delay = 0,
-}: AnimatedSectionProps) {
-  const reduceMotion = useReducedMotion();
-
-  if (reduceMotion) {
-    return <div className={className}>{children}</div>;
-  }
-
+/**
+ * Fade + slight rise, once, when the block enters the viewport.
+ *
+ * Always renders the same markup on server and client — reduced-motion
+ * preferences are honored via <MotionConfig reducedMotion="user"> in
+ * Providers (movement is dropped, leaving a simple fade). Branching on
+ * useReducedMotion() here would cause a hydration mismatch, because the
+ * server cannot know the visitor's OS setting.
+ */
+export function AnimatedSection({ children, className, delay = 0 }: AnimatedSectionProps) {
   return (
     <motion.div
       className={cn(className)}
