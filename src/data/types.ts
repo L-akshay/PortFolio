@@ -91,6 +91,12 @@ export type Project = {
   featured: boolean;
   /** Accent used by the generated SVG-style thumbnail. */
   accent: "violet" | "cyan" | "mint" | "amber";
+  /**
+   * Real thumbnail image (path under /public). `fit: "contain"` floats the
+   * image on a soft gradient (for portrait screenshots/logos); "cover" fills.
+   * Omit to render the generated placeholder art.
+   */
+  thumbnail?: { src: string; fit?: "cover" | "contain" };
   githubUrl?: string;
   liveUrl?: string;
   details: {

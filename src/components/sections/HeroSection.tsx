@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, FileText, MapPin } from "lucide-react";
 import { profile } from "@/data/profile";
@@ -20,14 +21,14 @@ export function HeroSection() {
       {/* Banner + avatar */}
       <div className="relative -mt-8 mb-16">
         <div className="relative h-52 w-full overflow-hidden rounded-2xl">
-          {/* Replace with <Image src="/images/banner.png" fill /> when you have one */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-[radial-gradient(120%_160%_at_15%_0%,#3b0a2a_0%,#180a1f_45%,#0a0a12_100%)]"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-[radial-gradient(circle_at_80%_30%,rgba(236,72,153,0.35),transparent_55%),radial-gradient(circle_at_30%_80%,rgba(139,92,246,0.25),transparent_50%)] opacity-40"
+          {/* Swap /images/banner.svg for a real photo banner anytime */}
+          <Image
+            alt="hero banner"
+            src="/images/banner.svg"
+            fill
+            priority
+            unoptimized
+            className="object-cover"
           />
           <div className="absolute inset-0 flex items-start justify-center px-4 pt-4 text-center">
             <p className="text-lg font-medium text-white italic drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] md:text-2xl">
@@ -36,10 +37,14 @@ export function HeroSection() {
           </div>
         </div>
         <div className="border-background bg-background ring-border/60 dark:ring-border absolute -bottom-12 left-8 h-24 w-24 overflow-hidden rounded-full border-4 shadow-md ring-1 shadow-black/20 md:h-28 md:w-28">
-          {/* Replace with <Image src="/images/profile.png" width={112} height={112} /> */}
-          <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-pink-500/80 via-fuchsia-600/80 to-violet-700/80 text-4xl font-bold text-white">
-            {profile.name.charAt(0)}
-          </div>
+          <Image
+            alt={`${profile.name} profile photo`}
+            src="/images/profile.png"
+            width={112}
+            height={112}
+            priority
+            className="h-full w-full object-cover"
+          />
         </div>
       </div>
 

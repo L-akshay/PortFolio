@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/data/types";
 
@@ -9,8 +10,9 @@ const accents = {
 } as const;
 
 /**
- * Generated thumbnail — an abstract module card standing in for a screenshot.
- * Swap for a real image per project by adding a thumbnail to the data file.
+ * Project thumbnail. Renders the real image when `project.thumbnail` is set
+ * ("cover" fills the frame, "contain" floats it on a soft gradient); falls
+ * back to generated module-card art otherwise.
  */
 export function ProjectThumb({
   project,
@@ -19,6 +21,31 @@ export function ProjectThumb({
   project: Project;
   className?: string;
 }) {
+  if (project.thumbnail) {
+    const { src, fit = "cover" } = project.thumbnail;
+    return (
+      <div
+        className={cn(
+          "border-border/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg border",
+          fit === "contain" &&
+            cn("bg-linear-to-br to-transparent", accents[project.accent]),
+          className,
+        )}
+      >
+        <Image
+          src={src}
+          alt={`${project.title} preview`}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className={cn(
+            "transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
+            fit === "cover" ? "object-cover" : "object-contain p-3",
+          )}
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       aria-hidden="true"

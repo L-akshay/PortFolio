@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="420" viewBox="0 0 1600 420">
+  <defs>
+    <radialGradient id="base" cx="15%" cy="0%" r="120%">
+      <stop offset="0%" stop-color="#2a0a20"/>
+      <stop offset="45%" stop-color="#150a1c"/>
+      <stop offset="100%" stop-color="#0a0a12"/>
+    </radialGradient>
+    <radialGradient id="pink" cx="78%" cy="28%" r="45%">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.4"/>
+      <stop offset="60%" stop-color="#db2777" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#db2777" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="violet" cx="28%" cy="85%" r="50%">
+      <stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#7c3aed" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cyan" cx="55%" cy="10%" r="35%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0v48" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ec4899" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ec4899" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="420" fill="url(#base)"/>
+  <rect width="1600" height="420" fill="url(#grid)"/>
+  <rect width="1600" height="420" fill="url(#pink)"/>
+  <rect width="1600" height="420" fill="url(#violet)"/>
+  <rect width="1600" height="420" fill="url(#cyan)"/>
+  <path d="M-100 380 L1700 40" stroke="url(#beam)" stroke-width="120" opacity="0.5"/>
+  <circle cx="1240" cy="118" r="3" fill="#ec4899" fill-opacity="0.8"/>
+  <circle cx="1330" cy="205" r="2" fill="#f9a8d4" fill-opacity="0.6"/>
+  <circle cx="1150" cy="260" r="2.5" fill="#c084fc" fill-opacity="0.55"/>
+  <circle cx="360" cy="120" r="2" fill="#f9a8d4" fill-opacity="0.4"/>
+  <circle cx="520" cy="300" r="2.5" fill="#a78bfa" fill-opacity="0.45"/>
+  <path d="M1150 260 L1240 118 L1330 205" stroke="#ec4899" stroke-opacity="0.25" stroke-width="1" fill="none"/>
+</svg>

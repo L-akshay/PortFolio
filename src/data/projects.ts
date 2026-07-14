@@ -48,6 +48,7 @@ export const projects: Project[] = [
     impact: "100K+ users",
     featured: true,
     accent: "violet",
+    thumbnail: { src: "/images/projects/voice-to-notes.webp", fit: "contain" },
     liveUrl: "https://voicetonotes.ai",
     details: {
       context:
@@ -82,6 +83,7 @@ export const projects: Project[] = [
     impact: "Live demo to national judges",
     featured: true,
     accent: "amber",
+    thumbnail: { src: "/images/projects/floatchat.png", fit: "cover" },
     githubUrl: "https://github.com/L-akshay/SIH-FloatChat",
     // TODO: paste the demo URL from the resume
     // liveUrl: "https://...",
@@ -117,6 +119,7 @@ export const projects: Project[] = [
     impact: "Resilient multi-source AI pipeline",
     featured: true,
     accent: "mint",
+    thumbnail: { src: "/images/projects/lead-generator.png", fit: "cover" },
     githubUrl: "https://github.com/L-akshay/lead-generator",
     details: {
       context:

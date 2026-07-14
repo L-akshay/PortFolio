@@ -5,7 +5,7 @@ export const alt = `${profile.name} — ${profile.role}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-/** Generated share image — no static asset to maintain. */
+/** Generated share image — matches the site's neutral + pink identity. */
 export default function OgImage() {
   return new ImageResponse(
     <div
@@ -16,27 +16,43 @@ export default function OgImage() {
         flexDirection: "column",
         justifyContent: "center",
         padding: 80,
-        background: "#090b10",
-        color: "#f5f7fa",
+        background: "#0a0a0c",
+        color: "#f2f2f2",
         fontFamily: "sans-serif",
+        position: "relative",
       }}
     >
-      <div style={{ display: "flex", fontSize: 28, color: "#8b7cff" }}>
+      <div
+        style={{
+          position: "absolute",
+          top: -200,
+          right: -100,
+          width: 700,
+          height: 500,
+          borderRadius: 9999,
+          background:
+            "radial-gradient(circle at 30% 40%, rgba(236,72,153,0.35) 0%, rgba(219,39,119,0.18) 45%, transparent 75%)",
+          filter: "blur(60px)",
+          display: "flex",
+        }}
+      />
+      <div style={{ display: "flex", fontSize: 26, color: "#ec4899" }}>
         ~/{profile.shortName}
       </div>
-      <div style={{ display: "flex", fontSize: 72, fontWeight: 700, marginTop: 24 }}>
+      <div style={{ display: "flex", fontSize: 68, fontWeight: 700, marginTop: 20 }}>
         Hi, I&apos;m {profile.name}.
       </div>
-      <div style={{ display: "flex", fontSize: 36, color: "#55d6d0", marginTop: 16 }}>
+      <div style={{ display: "flex", fontSize: 32, color: "#a3a3a3", marginTop: 14 }}>
         {profile.role}
       </div>
       <div
         style={{
           display: "flex",
-          fontSize: 26,
-          color: "#98a2b3",
-          marginTop: 32,
-          maxWidth: 900,
+          fontSize: 24,
+          color: "#8a8a8a",
+          marginTop: 28,
+          maxWidth: 920,
+          lineHeight: 1.4,
         }}
       >
         {profile.tagline}
