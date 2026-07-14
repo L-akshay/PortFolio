@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-/** Compact editorial column used by every page (~820px). */
+/** Compact centered column (~768px) with a soft blur-in entrance. */
 export function PageContainer({
   children,
   className,
@@ -9,7 +9,7 @@ export function PageContainer({
   className?: string;
 }) {
   return (
-    <div className={cn("mx-auto w-full max-w-[52rem] px-4 sm:px-6", className)}>
+    <div className={cn("animate-fade-in-blur mx-auto w-full max-w-3xl px-4", className)}>
       {children}
     </div>
   );

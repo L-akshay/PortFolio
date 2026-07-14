@@ -2,15 +2,15 @@ import { cn } from "@/lib/utils";
 import type { Project } from "@/data/types";
 
 const accents = {
-  violet: "from-[#8b7cff]/25 via-[#8b7cff]/10 text-[#8b7cff]",
-  cyan: "from-[#55d6d0]/25 via-[#55d6d0]/10 text-[#3db8b2]",
-  mint: "from-[#7fe0b2]/25 via-[#7fe0b2]/10 text-[#3fae7c]",
-  amber: "from-amber-400/25 via-amber-400/10 text-amber-500",
+  violet: "from-violet-500/25 via-violet-500/10 text-violet-500",
+  cyan: "from-cyan-500/25 via-cyan-500/10 text-cyan-600 dark:text-cyan-400",
+  mint: "from-emerald-500/25 via-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+  amber: "from-amber-400/25 via-amber-400/10 text-amber-600 dark:text-amber-400",
 } as const;
 
 /**
- * Original generated thumbnail — an abstract "module card" instead of fake
- * screenshots. Zero image requests, no layout shift.
+ * Generated thumbnail — an abstract module card standing in for a screenshot.
+ * Swap for a real image per project by adding a thumbnail to the data file.
  */
 export function ProjectThumb({
   project,
@@ -23,7 +23,7 @@ export function ProjectThumb({
     <div
       aria-hidden="true"
       className={cn(
-        "border-border relative flex min-h-32 items-center justify-center overflow-hidden rounded-lg border bg-gradient-to-br to-transparent",
+        "border-border/50 relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-lg border bg-linear-to-br to-transparent",
         accents[project.accent],
         className,
       )}

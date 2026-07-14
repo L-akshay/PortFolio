@@ -18,7 +18,7 @@ const statusLabel: Record<
 function FreelanceCard({ project }: { project: FreelanceProject }) {
   const status = statusLabel[project.status];
   return (
-    <article className="border-border bg-surface hover:border-border-strong flex flex-col rounded-xl border p-5 transition-colors">
+    <article className="border-border/50 bg-surface hover:border-border flex flex-col rounded-xl border p-5 shadow-sm transition-all duration-300 hover:shadow-md">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="font-semibold">{project.name}</h3>
         <div className="flex items-center gap-1.5">

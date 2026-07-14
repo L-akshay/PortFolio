@@ -1,65 +1,91 @@
 "use client";
 
-import { ArrowUpRight } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import Link from "next/link";
 import type { Project } from "@/data/types";
-import { Badge } from "@/components/ui/Badge";
 import { ProjectDialog } from "./ProjectDialog";
 import { ProjectThumb } from "./ProjectThumb";
 
-/**
- * Clickable card that opens the project dialog.
- * `wide` renders a horizontal variant for controlled layout variation.
- */
-export function ProjectCard({
-  project,
-  wide = false,
-}: {
-  project: Project;
-  wide?: boolean;
-}) {
+/** Reference-style project card: lifts on hover, whole card opens details. */
+export function ProjectCard({ project }: { project: Project }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <ProjectDialog
-      project={project}
-      trigger={
-        <button
-          type="button"
-          aria-label={`View details of ${project.title}`}
-          className={cn(
-            "group border-border bg-surface hover:border-border-strong hover:shadow-primary/5 flex w-full cursor-pointer flex-col gap-4 rounded-xl border p-4 text-left transition-all hover:shadow-lg",
-            wide && "sm:flex-row sm:items-stretch",
-          )}
-        >
-          <div
-            className={cn("overflow-hidden rounded-lg", wide && "sm:w-2/5 sm:shrink-0")}
-          >
-            <ProjectThumb
-              project={project}
-              className={cn(
-                "h-full transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100",
-                wide ? "min-h-36" : "min-h-32",
-              )}
-            />
-          </div>
-          <div className="flex flex-1 flex-col">
-            <div className="flex items-start justify-between gap-2">
-              <h3 className="group-hover:text-primary font-semibold">{project.title}</h3>
-              <ArrowUpRight
-                className="text-muted group-hover:text-primary size-4 shrink-0 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                aria-hidden="true"
-              />
+    <>
+      <div
+        role="button"
+        tabIndex={0}
+        aria-label={`View details of ${project.title}`}
+        onClick={() => setIsOpen(true)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            setIsOpen(true);
+          }
+        }}
+        className="group border-border/50 bg-surface hover:border-border relative flex cursor-pointer flex-col overflow-hidden rounded-xl border shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:shadow-lg motion-reduce:transition-none motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100"
+      >
+        {/* Thumbnail */}
+        <div className="px-4 pt-4">
+          <ProjectThumb project={project} />
+        </div>
+
+        {/* Info */}
+        <div className="grow space-y-4 p-4">
+          <h3 className="text-foreground text-xl font-semibold tracking-tight">
+            {project.title}
+          </h3>
+          <div className="space-y-4">
+            <p className="text-muted text-sm leading-relaxed">{project.valueProp}</p>
+            <p className="text-secondary text-xs font-medium">{project.role}</p>
+            <div>
+              <h4 className="text-muted mb-2 text-xs font-semibold tracking-wider uppercase">
+                Tech Stack
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {project.technologies.map((tech) => (
+                  <span
+                    key={tech}
+                    className="bg-elevated/80 text-foreground border-border/30 rounded-md border px-2.5 py-1 text-xs font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
-            <p className="text-muted mt-1 text-sm leading-relaxed">{project.valueProp}</p>
-            <p className="text-secondary mt-1.5 text-xs">{project.role}</p>
-            <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
-              {project.impact ? <Badge tone="success">{project.impact}</Badge> : null}
-              {project.technologies.slice(0, wide ? 5 : 3).map((tech) => (
-                <Badge key={tech}>{tech}</Badge>
-              ))}
-            </div>
           </div>
-        </button>
-      }
-    />
+        </div>
+
+        {/* Links */}
+        {(project.githubUrl || project.liveUrl) && (
+          <div className="relative z-20 mt-auto flex flex-wrap gap-3 p-4 pt-0">
+            {project.githubUrl ? (
+              <Link
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 hover:shadow-md"
+              >
+                GitHub
+              </Link>
+            ) : null}
+            {project.liveUrl ? (
+              <Link
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="border-border bg-surface hover:bg-elevated text-foreground rounded-lg border px-4 py-2 text-sm font-medium transition-all duration-200 hover:shadow-md"
+              >
+                Live Demo
+              </Link>
+            ) : null}
+          </div>
+        )}
+      </div>
+
+      <ProjectDialog project={project} open={isOpen} onOpenChange={setIsOpen} />
+    </>
   );
 }

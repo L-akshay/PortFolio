@@ -19,11 +19,10 @@ export default function ProjectsPage() {
     <PageContainer className="pt-14 pb-24">
       <AnimatedSection>
         <SectionHeading
-          label="projects"
           title="All Projects"
-          description="Everything I've shipped or built — company products I contributed to, client work, team builds and personal experiments. Click any card for the full story."
+          description="Company products I contributed to, client work, team builds and personal experiments. Click any card for the full story."
         />
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {featured.map((p) => (
             <ProjectCard key={p.slug} project={p} />
           ))}
@@ -31,11 +30,9 @@ export default function ProjectsPage() {
       </AnimatedSection>
 
       {other.length > 0 ? (
-        <AnimatedSection className="mt-14">
-          <h2 className="text-primary mb-5 font-mono text-xs tracking-widest uppercase">
-            {"// more experiments"}
-          </h2>
-          <div className="grid gap-5 sm:grid-cols-2">
+        <AnimatedSection className="mt-16">
+          <h2 className="mb-8 text-2xl font-semibold tracking-tight">More experiments</h2>
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {other.map((p) => (
               <ProjectCard key={p.slug} project={p} />
             ))}

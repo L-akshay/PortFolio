@@ -1,124 +1,137 @@
-import { Suspense } from "react";
-import { Star, GitFork } from "lucide-react";
+"use client";
+
+import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useTheme } from "next-themes";
 import { githubUsername } from "@/lib/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GithubIcon } from "@/components/ui/SocialIcon";
+import { Button } from "@/components/ui/Button";
 
-type Repo = {
-  name: string;
-  html_url: string;
-  description: string | null;
-  language: string | null;
-  stargazers_count: number;
-  forks_count: number;
-  fork: boolean;
+const ActivityCalendar = dynamic(
+  () => import("react-activity-calendar").then((mod) => mod.ActivityCalendar),
+  { ssr: false },
+);
+
+type ContributionItem = {
+  date: string;
+  count: number;
+  level: 0 | 1 | 2 | 3 | 4;
 };
 
-async function fetchRecentRepos(): Promise<Repo[] | null> {
-  try {
-    const res = await fetch(
-      `https://api.github.com/users/${githubUsername}/repos?sort=pushed&per_page=12`,
-      {
-        headers: { Accept: "application/vnd.github+json" },
-        next: { revalidate: 3600 },
-      },
-    );
-    if (!res.ok) return null;
-    const repos = (await res.json()) as Repo[];
-    return repos.filter((r) => !r.fork).slice(0, 4);
-  } catch {
-    return null;
-  }
-}
+type ApiResponse = {
+  total?: Record<string, number>;
+  contributions?: { date: string; count: number; level: number }[];
+};
 
-async function RepoList() {
-  const repos = await fetchRecentRepos();
-
-  if (!repos || repos.length === 0) {
-    // Graceful fallback when the GitHub API is unavailable or rate-limited.
-    return (
-      <p className="border-border bg-surface text-muted rounded-xl border p-5 text-sm">
-        Couldn&apos;t load repositories right now — browse them directly on{" "}
-        <a
-          href={`https://github.com/${githubUsername}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary hover:underline"
-        >
-          github.com/{githubUsername}
-        </a>
-        .
-      </p>
-    );
-  }
-
-  return (
-    <ul className="grid gap-3 sm:grid-cols-2">
-      {repos.map((repo) => (
-        <li key={repo.name}>
-          <a
-            href={repo.html_url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border-border bg-surface hover:border-border-strong flex h-full flex-col rounded-xl border p-4 transition-colors"
-          >
-            <p className="text-primary truncate font-mono text-sm font-medium">
-              {repo.name}
-            </p>
-            <p className="text-muted mt-1 line-clamp-2 flex-1 text-xs leading-relaxed">
-              {repo.description ?? "No description"}
-            </p>
-            <p className="text-muted mt-3 flex items-center gap-3 text-xs">
-              {repo.language ? <span>{repo.language}</span> : null}
-              <span className="inline-flex items-center gap-1">
-                <Star className="size-3" aria-hidden="true" />
-                {repo.stargazers_count}
-              </span>
-              <span className="inline-flex items-center gap-1">
-                <GitFork className="size-3" aria-hidden="true" />
-                {repo.forks_count}
-              </span>
-            </p>
-          </a>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function RepoSkeleton() {
-  return (
-    <div className="grid gap-3 sm:grid-cols-2" aria-hidden="true">
-      {Array.from({ length: 4 }).map((_, i) => (
-        <div
-          key={i}
-          className="border-border bg-elevated h-28 animate-pulse rounded-xl border motion-reduce:animate-none"
-        />
-      ))}
-    </div>
-  );
-}
-
+/** GitHub contribution calendar with loading and graceful error states. */
 export function GithubSection() {
+  const [contributions, setContributions] = useState<ContributionItem[]>([]);
+  const [total, setTotal] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasError, setHasError] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    let cancelled = false;
+    async function fetchData() {
+      try {
+        const res = await fetch(
+          `https://github-contributions-api.jogruber.de/v4/${githubUsername}?y=last`,
+        );
+        if (!res.ok) throw new Error(`API returned ${res.status}`);
+        const data = (await res.json()) as ApiResponse;
+        if (!data.contributions || data.contributions.length === 0) {
+          throw new Error("No contribution data");
+        }
+        if (cancelled) return;
+        setContributions(
+          data.contributions.map((c) => ({
+            date: c.date,
+            count: c.count,
+            level: Math.min(Math.max(c.level, 0), 4) as ContributionItem["level"],
+          })),
+        );
+        setTotal(data.contributions.reduce((sum, c) => sum + c.count, 0));
+      } catch {
+        if (!cancelled) setHasError(true);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    }
+    fetchData();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
-    <section id="github" aria-label="GitHub activity">
-      <SectionHeading
-        label="github"
-        title="GitHub Activity"
-        description="Recent public repositories — the day-to-day tinkering behind the shipped work."
-      />
-      <Suspense fallback={<RepoSkeleton />}>
-        <RepoList />
-      </Suspense>
-      <a
+    <section id="github" aria-label="GitHub contributions">
+      <SectionHeading title="GitHub Contributions" />
+      <p className="text-muted -mt-4 mb-6 text-sm">
+        <b>{githubUsername}</b>&apos;s contributions in the last year
+        {!isLoading && !hasError && total > 0 ? (
+          <span className="text-foreground ml-2 font-medium">
+            · {total.toLocaleString()} total
+          </span>
+        ) : null}
+      </p>
+
+      {isLoading ? (
+        <div
+          className="border-border/50 bg-surface h-40 animate-pulse rounded-xl border shadow-sm motion-reduce:animate-none"
+          aria-hidden="true"
+        />
+      ) : hasError || contributions.length === 0 ? (
+        <div className="text-muted border-border rounded-xl border-2 border-dashed p-8 text-center">
+          <div className="bg-elevated mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full">
+            <GithubIcon className="h-8 w-8" />
+          </div>
+          <p className="text-foreground mb-2 font-medium">
+            Couldn&apos;t load contributions
+          </p>
+          <p className="mb-4 text-sm">
+            The GitHub data is taking a break — view it directly instead.
+          </p>
+          <Button variant="outline" asChild>
+            <Link
+              href={`https://github.com/${githubUsername}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2"
+            >
+              <GithubIcon className="h-4 w-4" />
+              Open GitHub profile
+            </Link>
+          </Button>
+        </div>
+      ) : (
+        <div className="border-border/50 bg-surface rounded-xl border p-5 shadow-sm">
+          <div className="w-full overflow-x-auto">
+            <ActivityCalendar
+              data={contributions}
+              blockSize={11}
+              blockMargin={3}
+              fontSize={12}
+              showTotalCount={false}
+              colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
+              maxLevel={4}
+              style={{ color: "rgb(150,150,150)" }}
+            />
+          </div>
+        </div>
+      )}
+
+      <Link
         href={`https://github.com/${githubUsername}`}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-primary mt-4 inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
+        className="text-muted hover:text-foreground mt-4 inline-flex items-center gap-1.5 text-sm font-medium transition-colors"
       >
         <GithubIcon className="size-4" />
         github.com/{githubUsername}
-      </a>
+      </Link>
     </section>
   );
 }

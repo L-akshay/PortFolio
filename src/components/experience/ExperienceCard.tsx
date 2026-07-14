@@ -12,12 +12,12 @@ export function ExperienceCard({ item }: { item: ExperienceItem }) {
     .filter((p) => p !== undefined);
 
   return (
-    <article className="border-border bg-surface hover:border-border-strong relative rounded-xl border p-5 transition-colors sm:p-6">
+    <article className="border-border/50 bg-surface hover:border-border relative rounded-xl border p-5 shadow-sm transition-all duration-300 hover:shadow-md sm:p-6">
       <header className="flex flex-wrap items-baseline justify-between gap-2">
         <div>
           <h3 className="text-lg font-semibold">
             {item.role} <span className="text-muted">·</span>{" "}
-            <span className="text-primary">{item.company}</span>
+            <span className="text-secondary">{item.company}</span>
           </h3>
           <p className="text-muted mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
             <span className="font-mono">{item.period}</span>

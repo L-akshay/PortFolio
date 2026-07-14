@@ -19,7 +19,11 @@ type AnimatedSectionProps = {
  * useReducedMotion() here would cause a hydration mismatch, because the
  * server cannot know the visitor's OS setting.
  */
-export function AnimatedSection({ children, className, delay = 0 }: AnimatedSectionProps) {
+export function AnimatedSection({
+  children,
+  className,
+  delay = 0,
+}: AnimatedSectionProps) {
   return (
     <motion.div
       className={cn(className)}

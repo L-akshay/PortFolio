@@ -5,30 +5,22 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 
 export function ProjectsSection() {
-  const [first, ...rest] = featuredProjects.slice(0, 4);
   return (
     <section id="projects" aria-label="Featured projects">
-      <SectionHeading
-        label="projects"
-        title="Featured Projects"
-        description="Selected work across Android, backend and full-stack — company, client and team projects, labelled as such."
-      />
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div className="sm:col-span-2">
-          <ProjectCard project={first} wide />
-        </div>
-        {rest.map((p) => (
+      <SectionHeading title="Projects" />
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {featuredProjects.slice(0, 4).map((p) => (
           <ProjectCard key={p.slug} project={p} />
         ))}
       </div>
-      <div className="mt-6">
+      <div className="mt-6 flex justify-center">
         <Link
           href="/projects"
-          className="group text-primary inline-flex items-center gap-1.5 text-sm font-medium hover:underline"
+          className="group border-border bg-surface text-foreground hover:border-foreground/20 relative inline-flex items-center gap-2 rounded-lg border px-6 py-3 text-sm font-medium shadow-sm transition-all duration-200 hover:scale-[1.02] hover:shadow-md motion-reduce:transition-none motion-reduce:hover:scale-100"
         >
-          All projects
+          Show all projects
           <ArrowRight
-            className="size-4 transition-transform group-hover:translate-x-0.5"
+            className="size-4 transition-transform group-hover:translate-x-1"
             aria-hidden="true"
           />
         </Link>

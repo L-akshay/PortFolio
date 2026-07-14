@@ -64,14 +64,14 @@ export function Navbar() {
     >
       <nav
         aria-label="Main navigation"
-        className="mx-auto flex h-14 w-full max-w-[52rem] items-center justify-between px-4 sm:px-6"
+        className="mx-auto flex h-14 w-full max-w-3xl items-center justify-between px-4"
       >
         <Link
           href="/"
           className="font-mono text-sm font-semibold tracking-tight"
           aria-label={`${profile.name} — home`}
         >
-          <span className="text-primary">~/</span>
+          <span className="text-secondary">~/</span>
           {profile.shortName}
         </Link>
 
@@ -85,7 +85,7 @@ export function Navbar() {
               className={cn(
                 "rounded-md px-2.5 py-1.5 text-sm transition-colors",
                 activeSection === id && isHome
-                  ? "text-primary"
+                  ? "text-foreground font-medium"
                   : "text-muted hover:text-foreground",
               )}
             >

@@ -4,11 +4,8 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 
 export function AboutSection() {
   return (
-    <section id="about" aria-labelledby="about-heading">
-      <SectionHeading label="about" title="About me" />
-      <div id="about-heading" className="sr-only">
-        About me
-      </div>
+    <section id="about" aria-label="About me">
+      <SectionHeading title="About me" />
 
       <p className="text-muted max-w-prose text-sm leading-relaxed sm:text-base">
         {profile.intro}
@@ -18,12 +15,12 @@ export function AboutSection() {
         {profile.highlights.map((h) => (
           <div
             key={h.label}
-            className="border-border bg-surface hover:border-border-strong rounded-xl border p-4 transition-colors"
+            className="border-border/50 bg-surface hover:border-border rounded-xl border p-4 shadow-sm transition-all duration-300 hover:shadow-md"
           >
             <dt className="text-muted text-xs font-medium tracking-wide uppercase">
               {h.label}
             </dt>
-            <dd className="text-primary mt-1 text-2xl font-semibold">{h.value}</dd>
+            <dd className="mt-1 text-2xl font-semibold">{h.value}</dd>
             <dd className="text-muted mt-1 text-xs leading-relaxed">{h.detail}</dd>
           </div>
         ))}

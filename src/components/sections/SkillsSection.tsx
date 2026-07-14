@@ -1,30 +1,27 @@
 import { skills } from "@/data/skills";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Badge } from "@/components/ui/Badge";
 
+/** Reference-style pill cloud, grouped under small muted labels. */
 export function SkillsSection() {
   return (
     <section id="skills" aria-label="Skills and technologies">
-      <SectionHeading
-        label="skills"
-        title="Skills & Technologies"
-        description="Organized by what I can actually deliver, not a logo wall."
-      />
-      <div className="grid gap-4 sm:grid-cols-2">
+      <SectionHeading title="Skills" />
+      <div className="space-y-6">
         {skills.map((group) => (
-          <div
-            key={group.title}
-            className="border-border bg-surface hover:border-border-strong rounded-xl border p-5 transition-colors"
-          >
-            <h3 className="font-semibold">{group.title}</h3>
-            <p className="text-muted mt-0.5 text-xs">{group.summary}</p>
-            <ul className="mt-3 flex flex-wrap gap-1.5">
+          <div key={group.title}>
+            <h3 className="text-muted mb-3 text-xs font-semibold tracking-wider uppercase">
+              {group.title}
+            </h3>
+            <div className="flex flex-wrap gap-3">
               {group.skills.map((skill) => (
-                <li key={skill}>
-                  <Badge>{skill}</Badge>
-                </li>
+                <span
+                  key={skill}
+                  className="bg-elevated/80 border-border/50 hover:border-border flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 hover:shadow-sm motion-reduce:transition-none motion-reduce:hover:scale-100"
+                >
+                  {skill}
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
         ))}
       </div>

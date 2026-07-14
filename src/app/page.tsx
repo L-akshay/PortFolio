@@ -11,7 +11,7 @@ import { ContactSection } from "@/components/sections/ContactSection";
 
 export default function Home() {
   return (
-    <PageContainer className="space-y-24 pb-24">
+    <PageContainer className="space-y-24 pt-12 pb-24">
       <AnimatedSection>
         <HeroSection />
       </AnimatedSection>

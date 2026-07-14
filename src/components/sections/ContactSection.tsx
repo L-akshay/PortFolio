@@ -48,7 +48,7 @@ export function ContactSection() {
             ))}
           </div>
         </div>
-        <div className="border-border bg-surface relative rounded-xl border p-5">
+        <div className="border-border/50 bg-surface relative rounded-xl border p-5 shadow-sm">
           <ContactForm />
         </div>
       </div>

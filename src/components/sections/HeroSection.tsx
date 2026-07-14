@@ -1,117 +1,118 @@
 import Link from "next/link";
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, FileText, MapPin } from "lucide-react";
 import { profile } from "@/data/profile";
 import { socials } from "@/data/socials";
 import { Button } from "@/components/ui/Button";
 import { SocialIcon } from "@/components/ui/SocialIcon";
+import { TextReveal } from "@/components/ui/TextReveal";
 
-/** Terminal-style identity panel — the hero visual, pure DOM, no images. */
-function StatusPanel() {
-  const rows: [string, string, "primary" | "secondary" | "success"][] = [
-    ["role", "full-stack · android · applied-ai", "primary"],
-    ["shipping", "production apps, 100k+ users reached", "secondary"],
-    ["status", "open to internships & engineering roles", "success"],
-  ];
-  return (
-    <div
-      aria-hidden="true"
-      className="border-border bg-surface shadow-primary/5 overflow-hidden rounded-xl border font-mono text-xs shadow-lg"
-    >
-      <div className="border-border bg-elevated flex items-center gap-1.5 border-b px-3 py-2">
-        <span className="bg-primary/50 size-2.5 rounded-full" />
-        <span className="bg-secondary/50 size-2.5 rounded-full" />
-        <span className="bg-success/50 size-2.5 rounded-full" />
-        <span className="text-muted ml-2">lakshay — status</span>
-      </div>
-      <div className="space-y-2 p-4">
-        {rows.map(([key, value, tone]) => (
-          <p key={key} className="flex gap-2">
-            <span className="text-muted">{key}:</span>
-            <span
-              className={
-                tone === "primary"
-                  ? "text-primary"
-                  : tone === "secondary"
-                    ? "text-secondary"
-                    : "text-success"
-              }
-            >
-              {value}
-            </span>
-          </p>
-        ))}
-        <p className="text-muted flex gap-2 pt-1">
-          <span className="text-primary">$</span>
-          <span>
-            ship --from prototype --to production
-            <span className="bg-primary ml-0.5 inline-block h-3 w-1.5 animate-pulse align-middle" />
-          </span>
-        </p>
-      </div>
-    </div>
-  );
-}
-
+/**
+ * Identity-first hero: banner with a personal motto, overlapping circular
+ * avatar, gradient name and a word-by-word revealed role line — followed by
+ * the positioning paragraph, CTAs and socials.
+ *
+ * The banner is a generated gradient and the avatar a monogram; drop real
+ * images into the two marked spots to replace them.
+ */
 export function HeroSection() {
   return (
-    <section aria-label="Introduction" className="pt-14 pb-4 sm:pt-20">
-      <div className="grid items-center gap-10 sm:grid-cols-[1.2fr_1fr]">
-        <div>
-          <div className="mb-4 flex flex-wrap items-center gap-2 text-xs">
-            {profile.openToWork ? (
-              <span className="border-success/30 bg-success/10 text-success inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-medium">
-                <span className="relative flex size-2">
-                  <span className="bg-success absolute inline-flex size-full animate-ping rounded-full opacity-60 motion-reduce:hidden" />
-                  <span className="bg-success relative inline-flex size-2 rounded-full" />
-                </span>
-                Open to opportunities
+    <section aria-label="Introduction">
+      {/* Banner + avatar */}
+      <div className="relative -mt-8 mb-16">
+        <div className="relative h-52 w-full overflow-hidden rounded-2xl">
+          {/* Replace with <Image src="/images/banner.png" fill /> when you have one */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[radial-gradient(120%_160%_at_15%_0%,#3b0a2a_0%,#180a1f_45%,#0a0a12_100%)]"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[radial-gradient(circle_at_80%_30%,rgba(236,72,153,0.35),transparent_55%),radial-gradient(circle_at_30%_80%,rgba(139,92,246,0.25),transparent_50%)] opacity-40"
+          />
+          <div className="absolute inset-0 flex items-start justify-center px-4 pt-4 text-center">
+            <p className="text-lg font-medium text-white italic drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)] md:text-2xl">
+              From prototype to production, I follow through.
+            </p>
+          </div>
+        </div>
+        <div className="border-background bg-background ring-border/60 dark:ring-border absolute -bottom-12 left-8 h-24 w-24 overflow-hidden rounded-full border-4 shadow-md ring-1 shadow-black/20 md:h-28 md:w-28">
+          {/* Replace with <Image src="/images/profile.png" width={112} height={112} /> */}
+          <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-pink-500/80 via-fuchsia-600/80 to-violet-700/80 text-4xl font-bold text-white">
+            {profile.name.charAt(0)}
+          </div>
+        </div>
+      </div>
+
+      {/* Name + role */}
+      <div className="space-y-2">
+        <h1 className="text-muted text-4xl font-semibold tracking-tight md:text-5xl">
+          {"Hi, I'm "}
+          <span className="from-foreground to-foreground/70 bg-linear-to-r bg-clip-text text-transparent">
+            {profile.name}
+          </span>
+        </h1>
+        <TextReveal className="text-muted text-2xl font-medium md:text-3xl" delay={300}>
+          {profile.role}
+        </TextReveal>
+      </div>
+
+      {/* Description */}
+      <div className="mt-8 flex flex-col gap-4">
+        <div className="flex flex-wrap items-center gap-2 text-xs">
+          {profile.openToWork ? (
+            <span className="border-success/30 bg-success/10 text-success inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 font-medium">
+              <span className="relative flex size-2">
+                <span className="bg-success absolute inline-flex size-full animate-ping rounded-full opacity-60 motion-reduce:hidden" />
+                <span className="bg-success relative inline-flex size-2 rounded-full" />
               </span>
-            ) : null}
-            <span className="border-border bg-elevated text-muted inline-flex items-center gap-1 rounded-full border px-2.5 py-1">
-              <MapPin className="size-3" aria-hidden="true" />
-              {profile.location}
+              Open to opportunities
             </span>
-          </div>
-
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-            Hi, I&apos;m {profile.name}
-            <span className="text-primary">.</span>
-          </h1>
-          <p className="text-secondary mt-2 text-lg font-medium">{profile.role}</p>
-          <p className="text-muted mt-4 max-w-prose text-sm leading-relaxed sm:text-base">
-            {profile.tagline}
-          </p>
-
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <Button asChild className="group">
-              <Link href="/resume">
-                View resume
-                <ArrowRight className="group-hover:translate-x-0.5" />
-              </Link>
-            </Button>
-            <Button asChild variant="outline">
-              <a href="#contact">Contact me</a>
-            </Button>
-            <div className="flex items-center gap-1">
-              {socials.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="text-muted hover:bg-elevated hover:text-primary rounded-lg p-2.5 transition-colors"
-                >
-                  <SocialIcon icon={s.icon} className="size-5" />
-                </a>
-              ))}
-            </div>
-          </div>
+          ) : null}
+          <span className="border-border bg-elevated/80 text-muted inline-flex items-center gap-1 rounded-full border px-2.5 py-1">
+            <MapPin className="size-3" aria-hidden="true" />
+            {profile.location}
+          </span>
         </div>
 
-        <div className="hidden sm:block">
-          <StatusPanel />
+        <p className="text-muted max-w-2xl text-lg leading-relaxed">
+          I build and ship real products across web, Android and backend systems — from
+          early prototypes to production apps used by real users.
+          <br />
+          <u className="underline underline-offset-2">Building</u> end-to-end,{" "}
+          <u className="underline underline-offset-2">shipping</u> fast,{" "}
+          <u className="underline underline-offset-2">learning</u> faster.
+        </p>
+
+        <div className="flex flex-wrap gap-3">
+          <Button asChild className="group">
+            <Link href="/resume">
+              <FileText />
+              Resume
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="group">
+            <a href="#contact">
+              Contact me
+              <ArrowRight className="group-hover:translate-x-1" />
+            </a>
+          </Button>
         </div>
+      </div>
+
+      {/* Socials */}
+      <div className="mt-6 flex gap-4">
+        {socials.map((s) => (
+          <a
+            key={s.label}
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.label}
+            className="text-muted hover:text-foreground transform transition-all duration-200 hover:scale-110"
+          >
+            <SocialIcon icon={s.icon} className="size-6" />
+          </a>
+        ))}
       </div>
     </section>
   );

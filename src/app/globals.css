@@ -1,41 +1,40 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:is(.dark *));
 
 /* ---------------------------------------------------------------------------
-   Design tokens — edit here to retheme the whole site.
-   Dark is the primary theme; light is a tuned counterpart, not an inversion.
+   Design tokens — near-neutral oklch palette with a pink accent, in the same
+   family as the reference site's premium minimal look.
 --------------------------------------------------------------------------- */
 :root {
-  --background: #f7f7fb;
-  --surface: #ffffff;
-  --surface-elevated: #eef0f7;
-  --foreground: #171b24;
-  --muted-foreground: #5b6474;
-  --primary: #6553e6;
-  --primary-foreground: #ffffff;
-  --secondary: #0e8c86;
-  --success: #157f5c;
-  --border: rgba(101, 83, 230, 0.18);
-  --border-strong: rgba(101, 83, 230, 0.35);
-  --ring: #6553e6;
-  --grain-opacity: 0.25;
+  --radius: 0.5rem;
+  --background: oklch(0.99 0 0);
+  --surface: oklch(1 0 0);
+  --surface-elevated: oklch(0.96 0.005 270);
+  --foreground: oklch(0.15 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --primary: oklch(0.2 0 0);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.59 0.2 356);
+  --success: oklch(0.55 0.15 155);
+  --border: oklch(0.9 0.004 270);
+  --border-strong: oklch(0.82 0.006 270);
+  --ring: oklch(0.3 0 0);
 }
 
 .dark {
-  --background: #090b10;
-  --surface: #11151d;
-  --surface-elevated: #171c26;
-  --foreground: #f5f7fa;
-  --muted-foreground: #98a2b3;
-  --primary: #8b7cff;
-  --primary-foreground: #0b0a14;
-  --secondary: #55d6d0;
-  --success: #7fe0b2;
-  --border: rgba(139, 124, 255, 0.18);
-  --border-strong: rgba(139, 124, 255, 0.4);
-  --ring: #8b7cff;
-  --grain-opacity: 0.35;
+  --background: oklch(0.1 0 0);
+  --surface: oklch(0.15 0.005 270);
+  --surface-elevated: oklch(0.2 0.008 270);
+  --foreground: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.65 0 0);
+  --primary: oklch(0.95 0 0);
+  --primary-foreground: oklch(0.15 0 0);
+  --secondary: oklch(0.72 0.18 356);
+  --success: oklch(0.75 0.15 155);
+  --border: oklch(0.25 0.008 270);
+  --border-strong: oklch(0.35 0.01 270);
+  --ring: oklch(0.65 0 0);
 }
 
 @theme inline {
@@ -51,18 +50,23 @@
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-ring: var(--ring);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-hanken-grotesk), sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+html::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html,
   html.lenis {
     scroll-behavior: auto;
   }
@@ -71,12 +75,27 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-hanken-grotesk), sans-serif;
+  letter-spacing: -0.01em;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1;
   text-rendering: optimizeLegibility;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  letter-spacing: -0.025em;
+  font-weight: 600;
+}
+
 ::selection {
-  background: color-mix(in srgb, var(--primary) 30%, transparent);
+  background-color: rgba(236, 72, 153, 0.3);
+  color: inherit;
 }
 
 /* Anchor targets shouldn't hide under the sticky navbar */
@@ -84,18 +103,83 @@ section[id] {
   scroll-margin-top: 5rem;
 }
 
-/* Subtle grain overlay, pure CSS — no image request */
-.grain::before {
-  content: "";
+/* Soft pink radial glow, fixed top-right — the signature background accent */
+.background-gradient {
+  height: 60vh;
+  width: 70vw;
+  border-radius: 50%;
+  filter: blur(8vw);
   position: fixed;
-  inset: 0;
-  z-index: 0;
+  top: -25vh;
+  right: -10vw;
+  opacity: 0.18;
+  background: radial-gradient(
+    circle at 30% 40%,
+    rgba(236, 72, 153, 0.35) 0%,
+    rgba(219, 39, 119, 0.25) 30%,
+    rgba(190, 24, 93, 0.15) 60%,
+    transparent 100%
+  );
   pointer-events: none;
-  opacity: calc(var(--grain-opacity) * 0.12);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  z-index: 0;
 }
 
-/* Visible focus ring everywhere, keyboard-only */
+.dark .background-gradient {
+  opacity: 0.22;
+  background: radial-gradient(
+    circle at 30% 40%,
+    rgba(236, 72, 153, 0.28) 0%,
+    rgba(219, 39, 119, 0.18) 30%,
+    rgba(190, 24, 93, 0.12) 60%,
+    transparent 100%
+  );
+}
+
+/* Page-level entrance */
+@keyframes fade-in-blur {
+  from {
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-blur {
+  animation: fade-in-blur 0.6s ease-out both;
+}
+
+/* Word-by-word heading reveal (see ui/TextReveal.tsx) */
+.reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.5s ease-out,
+    transform 0.5s ease-out;
+}
+
+.reveal-word.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in-blur {
+    animation: none;
+  }
+  .reveal-word {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Visible focus ring, keyboard-only */
 :focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
@@ -109,4 +193,14 @@ html.lenis body {
 }
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
+}
+
+/* GitHub contribution calendar sizing */
+.react-activity-calendar {
+  width: 100%;
+}
+
+.react-activity-calendar svg {
+  width: 100% !important;
+  height: auto !important;
 }
