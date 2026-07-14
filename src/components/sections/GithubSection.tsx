@@ -70,12 +70,18 @@ export function GithubSection() {
     <section id="github" aria-label="GitHub contributions">
       <SectionHeading title="GitHub Contributions" />
       <p className="text-muted -mt-4 mb-6 text-sm">
-        <b>{githubUsername}</b>&apos;s contributions in the last year
         {!isLoading && !hasError && total > 0 ? (
-          <span className="text-foreground ml-2 font-medium">
-            · {total.toLocaleString()} total
-          </span>
-        ) : null}
+          <>
+            <span className="text-foreground font-semibold">
+              {total.toLocaleString()} contributions
+            </span>{" "}
+            in the last year — <b>{githubUsername}</b>
+          </>
+        ) : (
+          <>
+            <b>{githubUsername}</b>&apos;s contributions in the last year
+          </>
+        )}
       </p>
 
       {isLoading ? (
@@ -107,16 +113,23 @@ export function GithubSection() {
           </Button>
         </div>
       ) : (
-        <div className="border-border/50 bg-surface rounded-xl border p-5 shadow-sm">
+        <div className="border-border/50 rounded-xl border bg-white p-5 shadow-sm dark:border-[#30363d] dark:bg-[#0d1117]">
           <div className="w-full overflow-x-auto">
             <ActivityCalendar
               data={contributions}
               blockSize={11}
               blockMargin={3}
+              blockRadius={2}
               fontSize={12}
               showTotalCount={false}
+              showWeekdayLabels
               colorScheme={resolvedTheme === "dark" ? "dark" : "light"}
               maxLevel={4}
+              // GitHub's real contribution palettes (light and dark UI)
+              theme={{
+                light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+                dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
+              }}
               style={{ color: "rgb(150,150,150)" }}
             />
           </div>
