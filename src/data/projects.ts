@@ -2,166 +2,140 @@ import type { Project } from "./types";
 
 export const projects: Project[] = [
   {
-    slug: "voicetonotes",
-    title: "VoiceToNotes",
-    valueProp: "Voice-to-notes Android app serving more than 100,000 users.",
-    role: "Android & backend contributor (internship at Web3Task)",
-    category: "Android & Backend Product",
-    ownership: "company product",
-    technologies: ["Kotlin", "Android SDK", "Firestore", "Firebase", "Crashlytics"],
-    impact: "100,000+ users",
-    featured: true,
-    accent: "violet",
-    details: {
-      context:
-        "VoiceToNotes is a Web3Task product that turns voice recordings into organized notes. I contributed to it during my internship — it is company-owned, not a personal project.",
-      problem:
-        "Users needed reliable capture on flaky networks: recording from the home screen, syncing across devices and handling long audio without failures.",
-      responsibilities: [
-        "Built Android home-screen widgets for one-tap recording and quick actions",
-        "Worked on Firestore synchronization across devices",
-        "Worked on streaming and chunked audio handling for long recordings",
-        "Contributed to session management and rate limiting",
-        "Integrated Firebase Analytics and Crashlytics",
-      ],
-      decisions: [
-        "Chunked audio uploads so long recordings survive connection drops",
-        "Widget actions kept independent of full app startup for speed",
-      ],
-      result:
-        "Features shipped to a production app with more than 100,000 users, with crash and usage telemetry wired in.",
-      lessons:
-        "At real user scale, edge cases (backgrounding, process death, slow networks) stop being edge cases.",
-    },
-  },
-  {
     slug: "traverse-vpn",
     title: "Traverse VPN",
-    valueProp: "WireGuard-based Android VPN client with split tunnelling.",
-    role: "Android contributor (internship at Web3Task)",
+    valueProp:
+      "Production WireGuard Android VPN client — concept to 100+ Play Store users in 48 hours.",
+    role: "Architect & lead developer (Web3Task)",
     category: "Android Networking",
     ownership: "company product",
-    technologies: ["Kotlin", "WireGuard", "Android VpnService", "Android SDK"],
-    impact: "Early production users",
+    technologies: ["Kotlin", "Java", "Android VpnService", "WireGuard"],
+    impact: "100+ users in 48 hours",
     featured: true,
     accent: "cyan",
+    // TODO: paste the real Play Store URL from the resume
+    // liveUrl: "https://play.google.com/store/apps/details?id=...",
     details: {
       context:
-        "Traverse VPN is a Web3Task Android VPN client built on WireGuard. I contributed during my internship — it is company-owned.",
+        "A Web3Task product I architected and launched end-to-end: a production Android VPN client built on WireGuard concepts with Android VpnService.",
       problem:
-        "Users want specific apps to bypass the VPN, and expect the tunnel to survive network changes, reboots and Android's aggressive process management.",
+        "Mobile VPNs live or die on flaky networks — the tunnel must survive 4G/5G/Wi-Fi handoffs, reconnect fast, and never leave the user silently disconnected.",
       responsibilities: [
-        "Contributed split tunnelling built on Android VpnService",
-        "Worked on connection lifecycle handling (connect, reconnect, teardown)",
-        "Worked within WireGuard integration on Android",
+        "Engineered the client with WireGuard concepts: peer configuration, key generation and tunnel lifecycle management",
+        "Structured modular components across UI, tunnel manager, protocol/configuration handling and connection lifecycle logic",
+        "Hardened mobile-network reliability with auth recovery, DNS fallback, retry backoff and reconnect logic for unstable 4G/5G/Wi-Fi",
+        "Targeted <1.5s tunnel setup and <3s recovery in testing",
       ],
       decisions: [
-        "Per-app tunnel exclusion driven through VpnService's allowed/disallowed app APIs",
-        "Explicit state machine for connection lifecycle instead of ad-hoc flags",
+        "Explicit connection-lifecycle state machine instead of ad-hoc flags — reconnection logic stays testable",
+        "Modular boundaries between UI, tunnel manager and protocol handling enabled 3 feature iterations in 2 weeks with zero reported regression bugs",
       ],
-      result: "Shipped to a product that acquired early real users.",
+      result:
+        "Launched on Google Play and scaled from concept to 100+ users within 48 hours.",
       lessons:
-        "Network code on Android is a lifecycle problem as much as a networking problem.",
+        "Network code on Android is a lifecycle problem as much as a networking problem — design for process death and network churn first.",
     },
   },
   {
-    slug: "quranlearn",
-    title: "QuranLearn",
-    valueProp: "Full-stack education platform with student, teacher and admin roles.",
-    role: "Solo full-stack engineer (freelance)",
-    category: "Full-Stack Platform",
-    ownership: "client project",
-    technologies: ["Next.js", "TypeScript", "Prisma", "Supabase", "Auth.js"],
-    impact: "Complete tutoring workflow in one platform",
+    slug: "voice-to-notes",
+    title: "Voice-to-Notes",
+    valueProp:
+      "AI speech-to-text product serving 100K+ users — I build its backend workflows and Android surfaces.",
+    role: "Backend & Android contributor (Web3Task)",
+    category: "Android & Backend Product",
+    ownership: "company product",
+    technologies: ["Node.js", "Firebase", "Cloud Firestore", "Android"],
+    impact: "100K+ users",
     featured: true,
-    accent: "mint",
+    accent: "violet",
+    liveUrl: "https://voicetonotes.ai",
     details: {
       context:
-        "A freelance engagement to move a tutoring service off spreadsheets and chat apps onto a proper platform.",
+        "Voice-to-Notes is a Web3Task AI product that turns speech into organized notes. I contribute to its backend and Android surfaces — it is company-owned.",
       problem:
-        "Three user types (students, teachers, admins) need different views over the same courses, sessions, attendance, homework and notes — plus meeting links that just work.",
+        "At 100K+ users, audio sessions, transcription state and notes must stay consistent across devices while long recordings process concurrently.",
       responsibilities: [
-        "Designed the data model in Prisma over Supabase Postgres",
-        "Implemented role-based access with Auth.js",
-        "Built course and session management, attendance, homework and notes flows",
-        "Integrated meeting links into the session workflow",
+        "Orchestrated backend workflows for audio session management, transcription state tracking and concurrent processing",
+        "Synchronized notes, sessions and transcription state across devices with Firebase Realtime Database and Cloud Firestore — maintaining a <200ms sync-latency target in common flows",
+        "Investigated 30+ user-reported transcription issues through crash logs and backend traces, improving successful transcription flow reliability by ~8%",
+        "Built 5 Android recording widgets and quick-access flows (15–25% feature-adoption lift)",
       ],
       decisions: [
-        "Single role-aware app instead of three separate dashboards — less code, consistent UX",
-        "Server components for data-heavy views; client components only for interactive forms",
+        "Async pipelines with explicit transcription state tracking so long audio survives retries and restarts",
+        "Firestore as the cross-device source of truth, with Realtime Database for low-latency sync paths",
       ],
       result:
-        "A working platform covering the full tutoring workflow, currently in development toward launch.",
+        "Shipped features running in production for more than 100,000 users, with measurable reliability gains.",
       lessons:
-        "Role-based products live or die by getting the permission model right in the schema, not in the UI.",
+        "At real user scale, edge cases — backgrounding, process death, slow networks — stop being edge cases.",
     },
   },
   {
     slug: "floatchat",
     title: "FloatChat",
     valueProp:
-      "Ocean-data chat platform built by a six-person team for Smart India Hackathon.",
-    role: "Team lead (6 people)",
+      "Full-stack AI system built and demoed live in 36 hours at Smart India Hackathon 2025.",
+    role: "Team lead (6 developers)",
     category: "Hackathon",
     ownership: "team project",
-    technologies: ["Flask", "React", "Python", "REST APIs"],
-    impact: "Led a 6-person team to a working demo",
+    technologies: ["Python", "ML Inference", "REST APIs", "React"],
+    impact: "Live demo to national judges",
     featured: true,
     accent: "amber",
+    githubUrl: "https://github.com/L-akshay/SIH-FloatChat",
+    // TODO: paste the demo URL from the resume
+    // liveUrl: "https://...",
     details: {
       context:
-        "Built for Smart India Hackathon (SIH) by a team of six that I led — a team effort, not a solo build.",
+        "Built for Smart India Hackathon 2025 by a 6-member team that I directed — a team effort under a 36-hour national deadline.",
       problem:
-        "Making ARGO ocean float data explorable through a conversational interface within hackathon time constraints.",
+        "Deliver a working end-to-end AI system — ingestion, ML inference, API gateway and frontend — fast enough that six people could build in parallel without blocking each other.",
       responsibilities: [
-        "Led the six-person team: scoping, task split, integration",
-        "Worked across the Flask backend and React frontend",
-        "Owned the demo narrative and final integration",
+        "Directed the 6-member team: scoping, task split, integration and demo",
+        "Mapped end-to-end architecture across ingestion, ML inference, REST gateway and React frontend so all six developers could work in parallel across service boundaries",
+        "Presented the functional live prototype to judges, walking through architecture decisions, execution tradeoffs and product flow",
       ],
       decisions: [
-        "Flask + React over a heavier stack — fastest path to a working demo",
-        "Cut features early to protect the end-to-end flow",
+        "Service boundaries drawn first — parallel work beat sequential perfection under a 36-hour clock",
+        "Cut features early to protect the end-to-end flow for the live demo",
       ],
-      result: "A working product demo delivered on deadline with a full team pipeline.",
+      result:
+        "A functional live prototype demoed to national judges, delivered on deadline.",
       lessons:
         "Leading means deciding what not to build. Integration time always costs more than planned.",
     },
   },
   {
-    slug: "moneyos",
-    title: "MoneyOS",
-    valueProp: "Personal finance tracking app for budgets and spending clarity.",
+    slug: "lead-generator",
+    title: "Lead Generator",
+    valueProp:
+      "AI company-intelligence pipeline that turns 4+ data sources into structured, validated reports.",
     role: "Solo builder",
     category: "Web App",
     ownership: "personal project",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
-    featured: false,
+    technologies: ["Gemini", "Tavily", "Node.js", "Zod"],
+    impact: "Resilient multi-source AI pipeline",
+    featured: true,
     accent: "mint",
+    githubUrl: "https://github.com/L-akshay/lead-generator",
     details: {
-      context: "A personal project exploring money management UX.",
-      problem: "Tracking spending across accounts without a heavyweight finance suite.",
-      responsibilities: ["Full design and implementation"],
-      decisions: ["Local-first data handling to keep the scope honest"],
-      result: "Working personal tool and design playground.",
-    },
-  },
-  {
-    slug: "ai-social-platform",
-    title: "AI Social Media Platform",
-    valueProp: "Experimental social platform with AI-assisted content workflows.",
-    role: "Solo builder",
-    category: "Web App",
-    ownership: "personal project",
-    technologies: ["Next.js", "TypeScript", "LLM APIs"],
-    featured: false,
-    accent: "violet",
-    details: {
-      context: "A personal experiment combining social feed mechanics with LLM features.",
+      context:
+        "A personal applied-AI project: a company-intelligence pipeline that extracts website, funding, competitor, branding, marketing-copy and tech-stack signals.",
       problem:
-        "Exploring how AI assistance fits into content creation without taking it over.",
-      responsibilities: ["Product concept, frontend, LLM integration"],
-      decisions: ["Kept AI features as assistive suggestions rather than auto-posting"],
-      result: "Functional prototype used to learn applied-AI product patterns.",
+        "External data providers stall and fail — a useful intelligence report has to degrade gracefully instead of collapsing when one source does.",
+      responsibilities: [
+        "Built the pipeline extracting signals from 4+ external data sources",
+        "Orchestrated parallel enrichment with per-call timeouts, exponential backoff and graceful degradation so reports still generate when providers stall or fail",
+        "Validated LLM outputs with Zod schemas to produce structured JSON reports and reduce malformed-response failures",
+      ],
+      decisions: [
+        "Parallel fan-out with independent failure domains per provider — one dead source never kills the report",
+        "Schema-validated LLM output (Zod) instead of trusting free-form JSON from the model",
+      ],
+      result:
+        "Structured, machine-consumable company reports that survive provider outages — built for downstream product use.",
+      lessons:
+        "LLM pipelines are distributed systems: timeouts, retries and validation matter more than the prompt.",
     },
   },
 ];

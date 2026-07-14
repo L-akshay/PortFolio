@@ -75,8 +75,7 @@ export function HeroSection() {
         </div>
 
         <p className="text-muted max-w-2xl text-lg leading-relaxed">
-          I build and ship real products across web, Android and backend systems — from
-          early prototypes to production apps used by real users.
+          {profile.tagline}
           <br />
           <u className="underline underline-offset-2">Building</u> end-to-end,{" "}
           <u className="underline underline-offset-2">shipping</u> fast,{" "}

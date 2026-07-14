@@ -1,43 +1,54 @@
 import type { EducationItem, Profile } from "./types";
 
 export const profile: Profile = {
-  name: "Lakshay",
+  name: "Lakshay Dawar",
   shortName: "lakshay",
-  role: "Full-Stack, Android & Applied AI Engineer",
+  role: "Software Engineer · AI Systems · Backend & Android Infrastructure",
   tagline:
-    "I build and ship real products across web, Android and backend systems — from early prototypes to production applications used by real users.",
+    "I ship production software — a WireGuard VPN client launched to Google Play with 100+ users in 48 hours, and backend workflows for an AI speech-to-text app serving 100K+ users.",
   location: "Delhi, India",
-  availability: "Open to internships and engineering opportunities · remote friendly",
+  availability: "Open to software engineering internships · remote friendly",
   openToWork: true,
-  email: "lakshaydawar2006@gmail.com",
+  email: "lakshaytechai@gmail.com",
+  phone: "+91 7827474642",
   intro:
-    "I'm a computer science undergraduate who has spent the last year shipping production software instead of toy demos. At Web3Task I worked on VoiceToNotes, an app serving 100,000+ users, and Traverse VPN, a WireGuard-based Android client — building Android widgets, Firestore sync, streaming audio pipelines and VPN lifecycle handling. Alongside that, I deliver freelance web projects end-to-end and led a six-person team to build FloatChat for Smart India Hackathon. I care about the whole path from requirement to release: backend, Android, frontend and the deployment glue in between.",
+    "I'm a Computer Science undergraduate at GGSIPU (GPA 9.1/10) with production experience across AI-integrated backend systems, Android networking and user-facing products. At Web3Task I architected and launched Traverse VPN — a WireGuard-based Android client that reached 100+ Play Store users within 48 hours — and built REST APIs and async backend workflows for Voice-to-Notes, an AI speech-to-text app with 100K+ users. I've triaged 70+ production issues down from hours to under 30 minutes, led a 4-member internship project team, and directed 6 developers to a live AI-system demo at Smart India Hackathon 2025. My focus: concurrency, networking, databases, reliability, and scalable AI infrastructure.",
   highlights: [
     {
-      label: "Products shipped",
-      value: "6+",
-      detail: "company, freelance and personal projects in production or live demos",
-    },
-    {
       label: "Users reached",
-      value: "100k+",
-      detail: "on VoiceToNotes, the largest product I've contributed to",
+      value: "100K+",
+      detail:
+        "on Voice-to-Notes, the AI speech-to-text app I build backend workflows for",
     },
     {
-      label: "Engineering areas",
-      value: "4",
-      detail: "web frontend, backend, Android and applied AI",
+      label: "Play Store launch",
+      value: "48 hrs",
+      detail: "Traverse VPN went from release to 100+ users in two days",
+    },
+    {
+      label: "Issues resolved",
+      value: "70+",
+      detail: "production incidents triaged; recurring fixes cut from hours to <30 min",
     },
   ],
   currentFocus:
-    "Currently focused on applied AI systems — retrieval, structured prompting and AI-assisted product workflows — while continuing full-stack and Android work.",
+    "Currently deepening AI systems work — RAG, structured outputs, tool-calling workflows and AI data pipelines — on top of solid CS fundamentals and daily DSA practice.",
 };
 
 export const education: EducationItem[] = [
   {
-    institution: "B.Tech, Computer Science",
-    degree: "Undergraduate — pursuing",
-    period: "2024 — present",
-    detail: "Delhi, India",
+    institution: "Guru Gobind Singh Indraprastha University (GGSIPU), Delhi",
+    degree: "B.Tech in Computer Science — GPA 9.1/10",
+    period: "Expected Aug 2028",
+    detail:
+      "Coursework: Data Structures & Algorithms, Operating Systems, DBMS, Computer Networks, OOP, Software Design",
   },
+];
+
+/** Achievements & leadership — straight from the resume. */
+export const achievements: string[] = [
+  "Delivered 1 Google Play networking app and contributed to 1 AI speech-to-text product serving 100K+ users across Android, backend and AI workflows.",
+  "Resolved 70+ Android/backend and transcription issues using crash analytics, structured logs, backend traces and user reports; cut recurring incident resolution from hours to under 30 minutes.",
+  "Led a 4-member project team during the Web3Task internship — task breakdown, implementation ownership, debugging and release handoff for a production project.",
+  "Directed 6 developers at Smart India Hackathon 2025, coordinating parallel frontend/backend/AI execution to deliver a live AI-system demo within 36 hours.",
 ];

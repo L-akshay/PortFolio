@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { profile, education } from "@/data/profile";
+import { profile, education, achievements } from "@/data/profile";
 import { experience } from "@/data/experience";
 import { featuredProjects } from "@/data/projects";
 import { skills } from "@/data/skills";
@@ -29,11 +29,25 @@ export default function ResumePage() {
           <h2 className="text-3xl font-bold tracking-tight">{profile.name}</h2>
           <p className="text-primary mt-1 text-lg">{profile.role}</p>
           <p className="text-muted mt-2 text-sm">
-            {profile.location} · {profile.email} ·{" "}
+            {profile.location}
+            {profile.phone ? ` · ${profile.phone}` : ""} · {profile.email}
+          </p>
+          <p className="text-muted mt-1 text-sm">
             {socials
               .filter((s) => s.icon !== "mail")
-              .map((s) => s.href.replace(/^https?:\/\/(www\.)?/, ""))
-              .join(" · ")}
+              .map((s, i) => (
+                <span key={s.label}>
+                  {i > 0 ? " · " : ""}
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-foreground underline underline-offset-2"
+                  >
+                    {s.href.replace(/^https?:\/\/(www\.)?/, "")}
+                  </a>
+                </span>
+              ))}
           </p>
         </header>
 
@@ -94,6 +108,20 @@ export default function ResumePage() {
                 </p>
                 <p className="text-muted text-xs">{p.technologies.join(" · ")}</p>
               </li>
+            ))}
+          </ul>
+        </section>
+
+        <section aria-labelledby="resume-achievements">
+          <h3
+            id="resume-achievements"
+            className="text-primary mb-3 font-mono text-xs tracking-widest uppercase"
+          >
+            Achievements & Leadership
+          </h3>
+          <ul className="text-muted list-disc space-y-1.5 pl-5 text-sm">
+            {achievements.map((a) => (
+              <li key={a}>{a}</li>
             ))}
           </ul>
         </section>

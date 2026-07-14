@@ -51,7 +51,10 @@ const personJsonLd = {
   email: `mailto:${profile.email}`,
   address: { "@type": "PostalAddress", addressLocality: "Delhi", addressCountry: "IN" },
   url: siteUrl,
-  sameAs: ["https://github.com/L-akshay"],
+  sameAs: [
+    "https://github.com/L-akshay",
+    "https://www.linkedin.com/in/lakshay-dawar-32153a32b",
+  ],
 };
 
 export default function RootLayout({

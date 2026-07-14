@@ -21,6 +21,8 @@ export type Profile = {
   /** true renders the green availability dot */
   openToWork: boolean;
   email: string;
+  /** Shown on the resume page only — never exposed to the chatbot. */
+  phone?: string;
   intro: string;
   highlights: { label: string; value: string; detail: string }[];
   currentFocus: string;
