@@ -9,12 +9,12 @@ import { cn } from "@/lib/utils";
 import { profile } from "@/data/profile";
 import { Button } from "@/components/ui/Button";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
+import { resumePdfHref } from "@/data/site-constants";
 
 const sectionLinks = [
-  { id: "about", label: "About" },
-  { id: "experience", label: "Experience" },
   { id: "work", label: "Work" },
   { id: "projects", label: "Projects" },
+  { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -77,6 +77,16 @@ export function Navbar() {
 
         {/* Desktop links */}
         <div className="hidden items-center gap-1 sm:flex">
+          <Link
+            href="/"
+            aria-current={pathname === "/" ? "page" : undefined}
+            className={cn(
+              "rounded-md px-2.5 py-1.5 text-sm transition-colors",
+              pathname === "/" ? "text-foreground font-medium" : "text-muted hover:text-foreground",
+            )}
+          >
+            Home
+          </Link>
           {sectionLinks.map(({ id, label }) => (
             <a
               key={id}
@@ -93,10 +103,10 @@ export function Navbar() {
             </a>
           ))}
           <Button asChild variant="outline" size="sm" className="ml-2">
-            <Link href="/resume">
+            <a href={resumePdfHref} download>
               <FileText />
               Resume
-            </Link>
+            </a>
           </Button>
           <div className="ml-1">
             <ThemeToggle />
@@ -118,6 +128,14 @@ export function Navbar() {
                 sideOffset={8}
                 className="border-border bg-surface data-[state=open]:animate-in z-50 w-44 rounded-xl border p-1.5 shadow-lg"
               >
+                <DropdownMenu.Item asChild>
+                  <Link
+                    href="/"
+                    className="data-[highlighted]:bg-elevated block cursor-pointer rounded-lg px-3 py-2 text-sm outline-none"
+                  >
+                    Home
+                  </Link>
+                </DropdownMenu.Item>
                 {sectionLinks.map(({ id, label }) => (
                   <DropdownMenu.Item key={id} asChild>
                     <a
@@ -130,12 +148,13 @@ export function Navbar() {
                 ))}
                 <DropdownMenu.Separator className="bg-border my-1 h-px" />
                 <DropdownMenu.Item asChild>
-                  <Link
-                    href="/resume"
+                  <a
+                    href={resumePdfHref}
+                    download
                     className="data-[highlighted]:bg-elevated block cursor-pointer rounded-lg px-3 py-2 text-sm outline-none"
                   >
                     Resume
-                  </Link>
+                  </a>
                 </DropdownMenu.Item>
               </DropdownMenu.Content>
             </DropdownMenu.Portal>

@@ -4,47 +4,53 @@ import { experience } from "@/data/experience";
 import { featuredProjects } from "@/data/projects";
 import { skills } from "@/data/skills";
 import { socials } from "@/data/socials";
+import { resumePdfHref } from "@/data/site-constants";
 import { PageContainer } from "@/components/layout/PageContainer";
+import { Button } from "@/components/ui/Button";
 import { PrintButton } from "./PrintButton";
 
 export const metadata: Metadata = {
   title: "Resume",
-  description: `Resume of ${profile.name} — ${profile.role}.`,
+  description: `Resume of ${profile.name} - ${profile.role}.`,
+  alternates: { canonical: "/resume" },
 };
 
-/**
- * A structured, printable resume rendered straight from the portfolio data —
- * always in sync with the site, no PDF file to maintain.
- */
 export default function ResumePage() {
   return (
     <PageContainer className="pt-14 pb-24">
-      <div className="mb-8 flex items-center justify-between print:hidden">
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-3 print:hidden">
         <h1 className="text-2xl font-semibold tracking-tight">Resume</h1>
-        <PrintButton />
+        <div className="flex flex-wrap gap-2">
+          <Button asChild>
+            <a href={resumePdfHref} download>
+              Download Resume PDF
+            </a>
+          </Button>
+          <PrintButton />
+        </div>
       </div>
 
-      <article className="border-border bg-surface space-y-8 rounded-xl border p-6 sm:p-10 print:border-0 print:p-0">
+      <article className="resume-print border-border bg-surface space-y-8 rounded-xl border p-6 sm:p-10 print:border-0 print:p-0">
         <header>
           <h2 className="text-3xl font-bold tracking-tight">{profile.name}</h2>
           <p className="text-primary mt-1 text-lg">{profile.role}</p>
           <p className="text-muted mt-2 text-sm">
             {profile.location}
-            {profile.phone ? ` · ${profile.phone}` : ""} · {profile.email}
+            {profile.phone ? ` - ${profile.phone}` : ""} - {profile.email}
           </p>
           <p className="text-muted mt-1 text-sm">
             {socials
-              .filter((s) => s.icon !== "mail")
-              .map((s, i) => (
-                <span key={s.label}>
-                  {i > 0 ? " · " : ""}
+              .filter((social) => social.icon !== "mail")
+              .map((social, index) => (
+                <span key={social.label}>
+                  {index > 0 ? " - " : ""}
                   <a
-                    href={s.href}
+                    href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-foreground underline underline-offset-2"
                   >
-                    {s.href.replace(/^https?:\/\/(www\.)?/, "")}
+                    {social.href.replace(/^https?:\/\/(www\.)?/, "")}
                   </a>
                 </span>
               ))}
@@ -72,17 +78,19 @@ export default function ResumePage() {
             <div key={item.company} className="mb-4">
               <div className="flex flex-wrap items-baseline justify-between gap-1">
                 <p className="font-semibold">
-                  {item.role} — {item.company}
+                  {item.role} - {item.company}
                 </p>
                 <p className="text-muted text-xs">
-                  {item.period} · {item.location}
+                  {item.period} - {item.location}
                 </p>
               </div>
               <ul className="text-muted mt-2 list-disc space-y-1 pl-5 text-sm">
-                {item.contributions.map((c) => (
-                  <li key={c.text}>
-                    <span className="text-foreground font-medium">[{c.area}]</span>{" "}
-                    {c.text}
+                {item.contributions.slice(0, 5).map((contribution) => (
+                  <li key={contribution.text}>
+                    <span className="text-foreground font-medium">
+                      [{contribution.area}]
+                    </span>{" "}
+                    {contribution.text}
                   </li>
                 ))}
               </ul>
@@ -98,15 +106,17 @@ export default function ResumePage() {
             Selected Projects
           </h3>
           <ul className="space-y-3">
-            {featuredProjects.map((p) => (
-              <li key={p.slug} className="text-sm">
+            {featuredProjects.map((project) => (
+              <li key={project.slug} className="text-sm">
                 <p>
-                  <span className="font-semibold">{p.title}</span>{" "}
+                  <span className="font-semibold">{project.title}</span>{" "}
                   <span className="text-muted">
-                    ({p.role}) — {p.valueProp}
+                    ({project.role}) - {project.valueProp}
                   </span>
                 </p>
-                <p className="text-muted text-xs">{p.technologies.join(" · ")}</p>
+                <p className="text-muted text-xs">
+                  {project.technologies.join(" - ")}
+                </p>
               </li>
             ))}
           </ul>
@@ -120,8 +130,8 @@ export default function ResumePage() {
             Achievements & Leadership
           </h3>
           <ul className="text-muted list-disc space-y-1.5 pl-5 text-sm">
-            {achievements.map((a) => (
-              <li key={a}>{a}</li>
+            {achievements.map((achievement) => (
+              <li key={achievement}>{achievement}</li>
             ))}
           </ul>
         </section>
@@ -150,11 +160,11 @@ export default function ResumePage() {
           >
             Education
           </h3>
-          {education.map((e) => (
-            <p key={e.institution} className="text-sm">
-              <span className="font-medium">{e.institution}</span>{" "}
+          {education.map((item) => (
+            <p key={item.institution} className="text-sm">
+              <span className="font-medium">{item.institution}</span>{" "}
               <span className="text-muted">
-                — {e.degree}, {e.period}
+                - {item.degree}, {item.period}
               </span>
             </p>
           ))}

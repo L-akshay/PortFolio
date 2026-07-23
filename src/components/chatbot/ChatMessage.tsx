@@ -10,13 +10,25 @@ export type Message = {
 
 /**
  * Renders one chat message. Assistant text is rendered as plain text with
- * internal links (/#section, /resume, /projects) made clickable — no HTML or
+ * internal links (/#section, /resume, /projects, case studies, resume PDF) made clickable — no HTML or
  * markdown is ever injected, which removes the sanitization problem entirely.
  */
 function renderWithLinks(text: string): React.ReactNode[] {
-  const parts = text.split(/(\/(?:#[a-z-]+|resume|projects|privacy)\b)/g);
+  const parts = text.split(
+    /(\/(?:#[a-z-]+|resume|projects(?:\/[a-z0-9-]+)?|privacy)\b|\/Lakshay_Dawar_Software_Engineer_Resume\.pdf)/g,
+  );
   return parts.map((part, i) =>
-    /^\/(?:#[a-z-]+|resume|projects|privacy)\b/.test(part) ? (
+    part === "/Lakshay_Dawar_Software_Engineer_Resume.pdf" ? (
+      <a
+        key={i}
+        href={part}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="text-primary underline underline-offset-2"
+      >
+        {part}
+      </a>
+    ) : /^\/(?:#[a-z-]+|resume|projects|privacy)\b/.test(part) ? (
       <Link key={i} href={part} className="text-primary underline underline-offset-2">
         {part}
       </Link>

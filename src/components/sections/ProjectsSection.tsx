@@ -7,7 +7,11 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 export function ProjectsSection() {
   return (
     <section id="projects" aria-label="Featured projects">
-      <SectionHeading title="Projects" />
+      <SectionHeading
+        label="case studies"
+        title="Featured Engineering Case Studies"
+        description="A closer look at shipped backend, Android and applied-AI work with verified ownership and outcomes."
+      />
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {featuredProjects.slice(0, 4).map((p) => (
           <ProjectCard key={p.slug} project={p} />

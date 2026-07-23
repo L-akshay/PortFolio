@@ -1,6 +1,7 @@
-import { MapPin, Mail } from "lucide-react";
+import { Download, MapPin, Mail } from "lucide-react";
 import { profile } from "@/data/profile";
 import { socials } from "@/data/socials";
+import { resumePdfHref } from "@/data/site-constants";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SocialIcon } from "@/components/ui/SocialIcon";
 import { ContactForm } from "./ContactForm";
@@ -10,7 +11,7 @@ export function ContactSection() {
     <section id="contact" aria-label="Contact">
       <SectionHeading
         label="contact"
-        title="Let's build something"
+        title="Let's build something useful."
         description="Open to internships, engineering roles and freelance projects. The fastest way to reach me is email."
       />
       <div className="grid gap-8 sm:grid-cols-[1fr_1.4fr]">
@@ -47,6 +48,14 @@ export function ContactSection() {
               </a>
             ))}
           </div>
+          <a
+            href={resumePdfHref}
+            download
+            className="border-border bg-surface hover:bg-elevated inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-colors"
+          >
+            <Download className="size-4" aria-hidden="true" />
+            Download resume
+          </a>
         </div>
         <div className="border-border/50 bg-surface relative rounded-xl border p-5 shadow-sm">
           <ContactForm />

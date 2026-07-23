@@ -89,7 +89,7 @@ ${data.education.map((e) => `- ${e.institution}, ${e.degree} (${e.period})`).joi
     `## Contact
 Email: ${data.contact.email}
 Links: ${data.contact.socials.map((s) => `${s.label}: ${s.href}`).join(", ")}
-Site sections: /#about /#experience /#work /#projects /#contact /resume /projects`,
+Site sections: /#about /#experience /#work /#projects /#contact /Lakshay_Dawar_Software_Engineer_Resume.pdf /resume /projects`,
   ];
 
   if (experience.length > 0 || /experience|work|intern|job/.test(q)) {

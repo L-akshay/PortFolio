@@ -56,7 +56,7 @@ See [.env.example](./.env.example). Everything degrades gracefully:
 - **Rate limiting** — in-memory sliding window (`src/lib/rate-limit.ts`), fine for a single-instance portfolio; swap for Upstash/Redis if you need strictness across instances.
 - **No database** — nothing is stored server-side.
 - **GSAP intentionally omitted** — framer-motion covers every shipped interaction; see `docs/REFERENCE_AUDIT.md`.
-- **Resume** — `/resume` renders a printable resume from portfolio data (print → save as PDF), so it never drifts out of sync.
+- **Resume** — `/Lakshay_Dawar_Software_Engineer_Resume.pdf` serves the downloadable resume PDF from `public`, while `/resume` remains the printable web resume.
 
 ## Deploying to Vercel
 

@@ -2,22 +2,6 @@ import type { FreelanceProject } from "./types";
 
 export const freelanceWork: FreelanceProject[] = [
   {
-    name: "QuranLearn — Online Education Platform",
-    industry: "Education",
-    problem:
-      "A tutoring service ran classes over spreadsheets and chat apps, with no single place for scheduling, attendance or homework.",
-    delivered:
-      "A full learning platform with student, teacher and admin roles: course and session management, attendance, homework, notes and meeting integration.",
-    responsibilities: [
-      "Full-stack design and implementation",
-      "Role-based auth and admin workflows",
-      "Database schema and deployment",
-    ],
-    stack: ["Next.js", "TypeScript", "Prisma", "Supabase", "Auth.js", "Tailwind CSS"],
-    status: "in-development",
-    confidential: false,
-  },
-  {
     name: "Consumer E-commerce Client",
     industry: "E-commerce",
     problem:
@@ -48,5 +32,21 @@ export const freelanceWork: FreelanceProject[] = [
     stack: ["Next.js", "Tailwind CSS", "Firebase Hosting", "Vercel"],
     status: "delivered",
     confidential: true,
+  },
+  {
+    name: "QuranLearn - Online Education Platform",
+    industry: "Education",
+    problem:
+      "A tutoring service ran classes over spreadsheets and chat apps, with no single place for scheduling, attendance or homework.",
+    delivered:
+      "A learning platform in development with student, teacher and admin roles: course and session management, attendance, homework, notes and meeting integration.",
+    responsibilities: [
+      "Full-stack design and implementation",
+      "Role-based auth and admin workflows",
+      "Database schema and deployment",
+    ],
+    stack: ["Next.js", "TypeScript", "Prisma", "Supabase", "Auth.js", "Tailwind CSS"],
+    status: "in-development",
+    confidential: false,
   },
 ];

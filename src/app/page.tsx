@@ -1,10 +1,12 @@
 import { PageContainer } from "@/components/layout/PageContainer";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { ProofPointsSection } from "@/components/sections/ProofPointsSection";
 import { AboutSection } from "@/components/sections/AboutSection";
 import { ExperienceSection } from "@/components/sections/ExperienceSection";
 import { FreelanceSection } from "@/components/sections/FreelanceSection";
 import { ProjectsSection } from "@/components/sections/ProjectsSection";
+import { AchievementsSection } from "@/components/sections/AchievementsSection";
 import { SkillsSection } from "@/components/sections/SkillsSection";
 import { GithubSection } from "@/components/sections/GithubSection";
 import { ContactSection } from "@/components/sections/ContactSection";
@@ -16,7 +18,10 @@ export default function Home() {
         <HeroSection />
       </AnimatedSection>
       <AnimatedSection delay={0.1}>
-        <AboutSection />
+        <ProofPointsSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <ProjectsSection />
       </AnimatedSection>
       <AnimatedSection>
         <ExperienceSection />
@@ -25,7 +30,10 @@ export default function Home() {
         <FreelanceSection />
       </AnimatedSection>
       <AnimatedSection>
-        <ProjectsSection />
+        <AchievementsSection />
+      </AnimatedSection>
+      <AnimatedSection>
+        <AboutSection />
       </AnimatedSection>
       <AnimatedSection>
         <SkillsSection />

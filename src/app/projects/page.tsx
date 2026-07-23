@@ -8,23 +8,24 @@ import { ProjectCard } from "@/components/projects/ProjectCard";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "All projects — Android products with 100k+ users, full-stack platforms, hackathon builds and personal experiments.",
+    "Engineering case studies and selected projects across backend, Android and applied AI.",
+  alternates: { canonical: "/projects" },
 };
 
 export default function ProjectsPage() {
-  const featured = projects.filter((p) => p.featured);
-  const other = projects.filter((p) => !p.featured);
+  const featured = projects.filter((project) => project.featured);
+  const other = projects.filter((project) => !project.featured);
 
   return (
     <PageContainer className="pt-14 pb-24">
       <AnimatedSection>
         <SectionHeading
           title="All Projects"
-          description="Company products I contributed to, client work, team builds and personal experiments. Click any card for the full story."
+          description="Company products I contributed to, team builds and personal projects. Open any card for the full case study."
         />
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {featured.map((p) => (
-            <ProjectCard key={p.slug} project={p} />
+          {featured.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </AnimatedSection>
@@ -33,8 +34,8 @@ export default function ProjectsPage() {
         <AnimatedSection className="mt-16">
           <h2 className="mb-8 text-2xl font-semibold tracking-tight">More experiments</h2>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {other.map((p) => (
-              <ProjectCard key={p.slug} project={p} />
+            {other.map((project) => (
+              <ProjectCard key={project.slug} project={project} />
             ))}
           </div>
         </AnimatedSection>

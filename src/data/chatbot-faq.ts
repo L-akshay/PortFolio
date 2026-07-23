@@ -1,105 +1,88 @@
 import type { FAQItem } from "./types";
 
-/**
- * Deterministic answers. These are served without an AI provider (fallback
- * mode) and also given to the model as approved phrasing for common asks.
- */
 export const faq: FAQItem[] = [
   {
     triggers: ["contact", "email", "reach", "hire", "get in touch"],
     question: "How can I contact Lakshay?",
     answer:
-      "Email lakshaytechai@gmail.com, or use the contact form in the Contact section. GitHub: github.com/L-akshay · LinkedIn: linkedin.com/in/lakshay-dawar-32153a32b.",
+      "Email lakshaytechai@gmail.com, use the Contact section at /#contact, or reach him through GitHub and LinkedIn links on the site.",
   },
   {
-    triggers: [
-      "available",
-      "availability",
-      "internship",
-      "opportunit",
-      "open to",
-      "remote",
-    ],
+    triggers: ["available", "availability", "internship", "opportunit", "open to", "remote"],
     question: "Is Lakshay available for internships?",
     answer:
-      "Yes — Lakshay is open to software engineering internships, including remote roles. He is based in Delhi, India, and currently interning at Web3Task.",
+      "Yes. Lakshay is open to software engineering internships, including remote-friendly roles. He is based in Delhi, India.",
   },
   {
     triggers: ["experience", "work history", "web3task", "intern"],
     question: "What experience does Lakshay have?",
     answer:
-      "Lakshay is a Full-Stack Developer Intern at Web3Task (Delhi, Jan 2026–Present), an AI productivity & consumer mobile startup. He architected and launched Traverse VPN — a WireGuard Android client that hit 100+ Play Store users in 48 hours — and builds REST APIs and async backend workflows for Voice-to-Notes, an AI speech-to-text app with 100K+ users. Details are in the Experience section.",
+      "Lakshay is a Full-Stack Developer Intern at Web3Task (Delhi, Jan 2026-Present). He works on Voice-to-Notes backend/Android workflows, Traverse VPN Android networking, and production reliability. See /#experience plus /projects/voice-to-notes and /projects/traverse-vpn.",
   },
   {
     triggers: ["voice", "notes", "speech", "transcription", "widget"],
     question: "What did Lakshay contribute to Voice-to-Notes?",
     answer:
-      "On Voice-to-Notes (a Web3Task product with 100K+ users) he built REST APIs and backend workflows for session management, transcription state tracking and concurrent audio processing, kept cross-device sync under a 200ms target with Firebase/Firestore, investigated 30+ transcription issues (~8% reliability gain), and shipped 5 Android recording widgets that lifted feature adoption 15–25%.",
+      "On Voice-to-Notes, a Web3Task speech-to-text product serving 100K+ users, Lakshay built REST APIs and backend workflows for sessions, transcription state tracking and concurrent audio processing. He also shipped 5 Android recording widgets with a verified 15-25% feature-adoption lift. Case study: /projects/voice-to-notes.",
   },
   {
     triggers: ["android", "kotlin", "vpn", "wireguard", "traverse", "networking"],
     question: "Does Lakshay have Android experience?",
     answer:
-      "Yes — deep production Android work. He architected and launched Traverse VPN, a WireGuard-based Android client (Kotlin/Java, Android VpnService, tunnel lifecycle, network-aware reconnection) that reached 100+ Play Store users in 48 hours, and built Android recording widgets for Voice-to-Notes.",
+      "Yes. Traverse VPN shows Android networking work with Kotlin/Java, Android VpnService, WireGuard concepts and tunnel lifecycle management; it reached 100+ users in 48 hours. He also built Android recording widgets for Voice-to-Notes. Case study: /projects/traverse-vpn.",
   },
   {
     triggers: ["backend", "api", "server", "database", "concurren"],
-    question: "Which projects show backend experience?",
+    question: "What backend experience does Lakshay have?",
     answer:
-      "Voice-to-Notes: REST APIs, session management, transcription state tracking, async pipelines and concurrent audio processing at 100K+ user scale. Lead Generator: a parallel AI enrichment pipeline with per-call timeouts, exponential backoff, graceful degradation and Zod-validated structured outputs. See Experience and Projects.",
+      "Voice-to-Notes shows production backend work: REST APIs, session management, transcription state tracking, async pipelines and concurrent audio processing at 100K+ user scale. Lead Generator shows an applied-AI backend pipeline with parallel enrichment, timeouts, backoff and Zod-validated structured outputs.",
   },
   {
     triggers: ["ai", "llm", "rag", "machine learning", "gemini", "pipeline"],
-    question: "What AI systems work has Lakshay done?",
+    question: "Which projects use AI?",
     answer:
-      "He works on AI-integrated backends: speech-to-text workflows for Voice-to-Notes (100K+ users), and Lead Generator — an AI company-intelligence pipeline using Gemini and Tavily with Zod-validated structured JSON outputs. His toolkit covers LLM APIs, RAG, structured outputs, tool-calling workflows and AI data pipelines.",
+      "Voice-to-Notes uses AI speech-to-text workflows, Lead Generator uses LLM APIs and structured outputs, and FloatChat was a full-stack AI system demoed at Smart India Hackathon 2025. Start at /#projects.",
   },
   {
     triggers: ["lead", "led", "team", "leadership", "floatchat", "hackathon", "sih"],
     question: "Has Lakshay led a team?",
     answer:
-      "Yes, twice: he directed 6 developers at Smart India Hackathon 2025 to build and demo FloatChat, a full-stack AI system, within 36 hours; and he led a 4-member project team at Web3Task through task breakdown, implementation, debugging and release handoff.",
+      "Yes. He directed 6 developers at Smart India Hackathon 2025 to deliver FloatChat as a live AI-system demo within 36 hours, and led a 4-member project team during the Web3Task internship. FloatChat case study: /projects/floatchat.",
   },
   {
     triggers: ["skill", "technolog", "stack", "tools", "languages"],
     question: "What technologies does Lakshay use?",
     answer:
-      "Languages: Java, Kotlin, Python, C++, TypeScript, JavaScript, SQL. Backend: Node.js, Express, REST APIs, WebSockets, Redis, concurrency. AI: LLM APIs, RAG, structured outputs, tool-calling. Databases: PostgreSQL, MongoDB, Firebase, Firestore. Mobile & cloud: Android, VpnService, Docker, CI/CD, Google Cloud Run, Vercel.",
-  },
-  {
-    triggers: ["impactful", "best project", "top project", "proud"],
-    question: "Show me the most impactful project.",
-    answer:
-      "Two stand out: Traverse VPN — a WireGuard Android client he architected that reached 100+ Play Store users in 48 hours — and Voice-to-Notes, the 100K+ user AI speech-to-text app whose backend workflows he builds. Both are in the Projects section.",
+      "Core skills include Kotlin, Java, TypeScript, JavaScript, Python, SQL, Node.js, Express.js, REST APIs, Firebase, Firestore, Android SDK, VpnService, WireGuard, LLM APIs, RAG, Docker, GitHub Actions and CI/CD. See /#skills.",
   },
   {
     triggers: ["education", "degree", "college", "university", "study", "gpa", "cgpa"],
     question: "What is Lakshay's education?",
     answer:
-      "B.Tech in Computer Science at Guru Gobind Singh Indraprastha University (GGSIPU), Delhi — GPA 9.1/10, expected to graduate Aug 2028. Coursework includes DSA, Operating Systems, DBMS, Computer Networks, OOP and Software Design.",
+      "Lakshay is pursuing a B.Tech in Computer Science at Bhagwan Parshuram Institute of Technology, GGSIPU, with GPA 9.1/10 and expected graduation in Aug 2028.",
   },
   {
     triggers: ["resume", "cv"],
     question: "Where can I find the resume?",
     answer:
-      "The Resume page (/resume) has a full printable resume built from this portfolio.",
+      "Download the PDF resume at /Lakshay_Dawar_Software_Engineer_Resume.pdf, or view the web resume at /resume.",
   },
   {
     triggers: ["github", "repos", "code", "dsa", "codolio", "leetcode"],
     question: "Where is Lakshay's code?",
     answer:
-      "GitHub: github.com/L-akshay — recent contributions are shown in the GitHub section. He also practices DSA daily (arrays, strings, trees, graphs, DP, greedy, recursion) tracked on Codolio.",
+      "GitHub is linked from the hero and contact sections: github.com/L-akshay. Recent engineering activity is also shown in the GitHub section.",
   },
   {
     triggers: ["freelance", "client", "commission"],
     question: "Does Lakshay do freelance work?",
     answer:
-      "Yes — freelance and client projects include an education platform, an e-commerce storefront and business landing pages. Some client work is confidential; see the Freelance & Client Work section.",
+      "Yes. Client work includes delivered e-commerce and business landing-page projects, plus QuranLearn as an in-development education platform. Confidential work is described without client names. See /#work.",
   },
   {
-    triggers: ["reliab", "debug", "incident", "crash", "issues"],
-    question: "What about debugging and reliability?",
+    triggers: ["interview", "why should", "hire"],
+    question: "Why should we interview Lakshay?",
     answer:
-      "It's a signature strength: 70+ Android/backend and transcription issues resolved using crash analytics, structured logs, backend traces and user reports — with recurring incident resolution cut from hours to under 30 minutes.",
+      "Lakshay has verified production ownership across backend, Android and applied-AI workflows: Voice-to-Notes at 100K+ users, Traverse VPN to 100+ users in 48 hours, Android widget adoption gains, and team leadership under hackathon and internship constraints. Good next reads: /projects/voice-to-notes and /projects/traverse-vpn.",
   },
 ];

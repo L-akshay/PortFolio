@@ -48,7 +48,6 @@ export const projects: Project[] = [
     impact: "100K+ users",
     featured: true,
     accent: "violet",
-    thumbnail: { src: "/images/projects/voice-to-notes.webp", fit: "contain" },
     liveUrl: "https://voicetonotes.ai",
     details: {
       context:

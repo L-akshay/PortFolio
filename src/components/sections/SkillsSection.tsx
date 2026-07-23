@@ -1,4 +1,4 @@
-import { skills } from "@/data/skills";
+import { additionalSkills, skills } from "@/data/skills";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 
 /** Clean pill rows grouped under small labels — no boxes, just breathing room. */
@@ -25,6 +25,7 @@ export function SkillsSection() {
           </div>
         ))}
       </div>
+      <p className="text-muted mt-7 text-sm">{additionalSkills}</p>
     </section>
   );
 }

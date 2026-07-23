@@ -4,41 +4,34 @@ export const experience: ExperienceItem[] = [
   {
     company: "Web3Task",
     role: "Full-Stack Developer Intern",
-    period: "Jan 2026 — Present",
+    period: "Jan 2026 - Present",
     location: "Delhi, India",
     description:
-      "AI productivity & consumer mobile startup. I work across two shipped products — Traverse VPN (which I architected and launched) and Voice-to-Notes (100K+ users) — plus the reliability engineering around them.",
+      "AI productivity and consumer mobile startup. I work across Voice-to-Notes, Traverse VPN and the production reliability work around them.",
     contributions: [
       {
-        area: "Traverse VPN",
-        text: "Architected and launched a WireGuard-based Android client — Kotlin/Java, Android VpnService, peer configuration, key generation and tunnel lifecycle management; reached 100+ Play Store users in 48 hours",
+        area: "Voice-to-Notes",
+        text: "Developed REST APIs and backend workflows for a 100K+ user AI speech-to-text app: session management, transcription state tracking, async pipelines and concurrent audio processing.",
         top: true,
       },
       {
-        area: "Voice-to-Notes",
-        text: "Developed REST APIs and backend workflows for a 100K+ user AI speech-to-text app — session management, transcription state tracking, async pipelines and concurrent audio processing",
+        area: "Android",
+        text: "Delivered 5 Android recording widgets and quick-access flows, driving a verified 15-25% lift in feature adoption.",
+        top: true,
+      },
+      {
+        area: "Traverse VPN",
+        text: "Architected and launched a WireGuard-based Android client using Kotlin/Java, Android VpnService, peer configuration and tunnel lifecycle management; reached 100+ users in 48 hours.",
         top: true,
       },
       {
         area: "Reliability",
-        text: "Triaged 40+ Android/backend production issues via crash analytics, structured logs and user reports; cut recurring incident resolution from hours to under 30 minutes",
+        text: "Triaged Android/backend production issues with Crashlytics, analytics, structured logs and user reports, reducing recurring incident resolution from hours to under 30 minutes.",
         top: true,
       },
       {
-        area: "Traverse VPN",
-        text: "Optimized VPN reliability across 4G/5G/Wi-Fi switches with network-aware reconnection, DNS fallback, authentication recovery and exponential backoff — targeting <1.5s tunnel setup and <3s recovery",
-      },
-      {
-        area: "Voice-to-Notes",
-        text: "Delivered 5 Android recording widgets and quick-access flows, driving a 15–25% lift in feature adoption",
-      },
-      {
-        area: "Ownership",
-        text: "Supported 6+ feature launches across 2 sprints, collaborating with product, design and marketing",
-      },
-      {
-        area: "Leadership",
-        text: "Led a 4-member project team — task breakdown, implementation ownership, debugging and release handoff for a production project",
+        area: "Release",
+        text: "Supported feature launches across sprints, including debugging, release handoff, Play Store-oriented mobile work and CI/CD collaboration.",
       },
     ],
     technologies: [
@@ -50,7 +43,8 @@ export const experience: ExperienceItem[] = [
       "Firebase",
       "Firestore",
       "REST APIs",
-      "Crash Analytics",
+      "Crashlytics",
+      "CI/CD",
     ],
     relatedProjectSlugs: ["traverse-vpn", "voice-to-notes"],
   },

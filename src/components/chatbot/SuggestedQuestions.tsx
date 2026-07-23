@@ -1,12 +1,11 @@
 "use client";
 
 const suggestions = [
-  "What experience does Lakshay have?",
-  "What did he work on at Web3Task?",
-  "Does he have Android experience?",
-  "Has he led a team?",
-  "Is he available for internships?",
-  "How can I contact him?",
+  "What did Lakshay build at Web3Task?",
+  "Explain the Traverse VPN architecture.",
+  "What backend experience does Lakshay have?",
+  "Which projects use AI?",
+  "Why should we interview Lakshay?",
 ];
 
 export function SuggestedQuestions({

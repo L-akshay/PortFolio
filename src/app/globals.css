@@ -204,3 +204,37 @@ html.lenis body {
   width: 100% !important;
   height: auto !important;
 }
+
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  header,
+  footer,
+  .background-gradient,
+  [data-chatbot-widget] {
+    display: none !important;
+  }
+
+  .resume-print {
+    box-shadow: none !important;
+  }
+
+  .resume-print section,
+  .resume-print li {
+    break-inside: avoid;
+  }
+
+  .resume-print a {
+    color: black !important;
+    text-decoration: underline;
+  }
+}

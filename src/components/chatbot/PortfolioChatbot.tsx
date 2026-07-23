@@ -72,8 +72,9 @@ export function PortfolioChatbot() {
       {open ? <ChatPanel onMinimize={minimize} /> : null}
 
       <div
+        data-chatbot-widget
         className={cn(
-          "fixed right-4 bottom-4 z-40 flex items-center gap-2 sm:right-5 sm:bottom-5",
+          "fixed right-3 bottom-3 z-40 flex items-center gap-2 sm:right-5 sm:bottom-5",
           open && "hidden",
         )}
       >

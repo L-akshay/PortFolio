@@ -7,7 +7,7 @@ export function PrintButton() {
   return (
     <Button variant="outline" onClick={() => window.print()}>
       <Printer />
-      Print / Save as PDF
+      Print Web Resume
     </Button>
   );
 }

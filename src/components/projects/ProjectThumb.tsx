@@ -12,7 +12,7 @@ const accents = {
 /**
  * Project thumbnail. Renders the real image when `project.thumbnail` is set
  * ("cover" fills the frame, "contain" floats it on a soft gradient); falls
- * back to generated module-card art otherwise.
+ * back to a clear product-preview placeholder otherwise.
  */
 export function ProjectThumb({
   project,
@@ -55,7 +55,7 @@ export function ProjectThumb({
         className,
       )}
     >
-      <svg className="absolute inset-0 h-full w-full opacity-[0.15]" aria-hidden="true">
+      <svg className="absolute inset-0 h-full w-full opacity-[0.12]" aria-hidden="true">
         <defs>
           <pattern
             id={`grid-${project.slug}`}
@@ -68,15 +68,17 @@ export function ProjectThumb({
         </defs>
         <rect width="100%" height="100%" fill={`url(#grid-${project.slug})`} />
       </svg>
-      <div className="relative px-4 text-center">
-        <p className="font-mono text-lg font-semibold tracking-tight">
-          {"<"}
-          {project.slug}
-          {" />"}
+      <div className="relative max-w-[90%] px-4 text-center">
+        <p className="text-foreground text-lg font-semibold tracking-tight">
+          {project.title}
         </p>
-        <p className="mt-1 font-mono text-[10px] tracking-widest uppercase opacity-80">
+        <p className="mt-1 text-xs font-medium tracking-wide uppercase opacity-85">
           {project.category}
         </p>
+        <p className="mt-2 line-clamp-1 font-mono text-[11px] opacity-80">
+          {project.technologies.slice(0, 3).join(" / ")}
+        </p>
+        <p className="text-muted mt-3 text-xs">Product preview coming soon</p>
       </div>
     </div>
   );
