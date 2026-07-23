@@ -82,7 +82,9 @@ export function Navbar() {
             aria-current={pathname === "/" ? "page" : undefined}
             className={cn(
               "rounded-md px-2.5 py-1.5 text-sm transition-colors",
-              pathname === "/" ? "text-foreground font-medium" : "text-muted hover:text-foreground",
+              pathname === "/"
+                ? "text-foreground font-medium"
+                : "text-muted hover:text-foreground",
             )}
           >
             Home
@@ -103,7 +105,7 @@ export function Navbar() {
             </a>
           ))}
           <Button asChild variant="outline" size="sm" className="ml-2">
-            <a href={resumePdfHref} download>
+            <a href={resumePdfHref} target="_blank" rel="noopener noreferrer">
               <FileText />
               Resume
             </a>
@@ -150,7 +152,8 @@ export function Navbar() {
                 <DropdownMenu.Item asChild>
                   <a
                     href={resumePdfHref}
-                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="data-[highlighted]:bg-elevated block cursor-pointer rounded-lg px-3 py-2 text-sm outline-none"
                   >
                     Resume

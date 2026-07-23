@@ -1,4 +1,4 @@
-import { Download, MapPin, Mail } from "lucide-react";
+import { FileText, MapPin, Mail } from "lucide-react";
 import { profile } from "@/data/profile";
 import { socials } from "@/data/socials";
 import { resumePdfHref } from "@/data/site-constants";
@@ -50,11 +50,12 @@ export function ContactSection() {
           </div>
           <a
             href={resumePdfHref}
-            download
+            target="_blank"
+            rel="noopener noreferrer"
             className="border-border bg-surface hover:bg-elevated inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-colors"
           >
-            <Download className="size-4" aria-hidden="true" />
-            Download resume
+            <FileText className="size-4" aria-hidden="true" />
+            Resume
           </a>
         </div>
         <div className="border-border/50 bg-surface relative rounded-xl border p-5 shadow-sm">

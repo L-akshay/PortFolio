@@ -22,8 +22,8 @@ export default function ResumePage() {
         <h1 className="text-2xl font-semibold tracking-tight">Resume</h1>
         <div className="flex flex-wrap gap-2">
           <Button asChild>
-            <a href={resumePdfHref} download>
-              Download Resume PDF
+            <a href={resumePdfHref} target="_blank" rel="noopener noreferrer">
+              Open Resume PDF
             </a>
           </Button>
           <PrintButton />
